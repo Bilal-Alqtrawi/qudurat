@@ -19,7 +19,6 @@ export default function Header() {
   const [hash, setHash] = useState("");
   const pathname = usePathname();
 
-  // تتبع الـ Hash على العميل لتحديث حالة الروابط النشطة داخل نفس الصفحة
   useEffect(() => {
     setHash(window.location.hash);
     const handleHashChange = () => setHash(window.location.hash);
@@ -35,7 +34,6 @@ export default function Header() {
   }, []);
 
   useEffect(() => {
-    // إغلاق قائمة الموبايل عند التنقل
     setIsMobileOpen(false);
   }, [pathname, hash]);
 
@@ -67,9 +65,10 @@ export default function Header() {
                     : pathname === link.href;
 
               return (
-                <a
+                <Link
                   key={index}
                   href={link.href}
+                  onClick={() => setIsMobileOpen(false)}
                   className={`relative py-1 tracking-wide transition-colors duration-300 group/link ${
                     isActive
                       ? "text-brand-gold"
@@ -82,7 +81,7 @@ export default function Header() {
                       isActive ? "w-full" : "w-0 group-hover/link:w-full"
                     }`}
                   />
-                </a>
+                </Link>
               );
             })}
           </nav>
