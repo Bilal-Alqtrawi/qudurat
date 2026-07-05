@@ -12,9 +12,9 @@ import ScrollFade from "@/components/ui/ScrollFade";
 
 export default function Home() {
   return (
-    <div className="relative w-full min-h-screen flex flex-col bg-white antialiased">
+    <div className="transition-all duration-300 relative w-full min-h-screen flex flex-col bg-white antialiased">
       <Header />
-      
+
       <main className="w-full grow">
         <ScrollFade>
           <Hero />

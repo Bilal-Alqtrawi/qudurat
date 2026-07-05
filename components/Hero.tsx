@@ -149,7 +149,8 @@ export default function Hero() {
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
             <Link
-              href="/register"
+              href="https://wa.me/966547477545"
+              target="_blank"
               className="px-8 py-4 rounded-2xl bg-brand-navy text-white font-black text-sm hover:shadow-xl hover:shadow-brand-navy/10 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
             >
               احجز مقعدك الآن

@@ -594,7 +594,6 @@ export default function FeaturedCourses() {
                 </div>
               </div>
 
-              {/* 3️⃣ الفوتر السفلي الثابت تماماً (Sticky Footer) */}
               <div className="p-6 sm:p-8 border-t border-slate-100 bg-slate-50/90 backdrop-blur-xs flex flex-wrap items-center justify-between gap-4 shrink-0 rounded-b-[2.5rem] relative z-10 text-right">
                 <div>
                   <span className="block text-[10px] text-brand-gray font-bold">
@@ -607,7 +606,13 @@ export default function FeaturedCourses() {
 
                 {selectedCourse.type !== "soon" ? (
                   <button
-                    onClick={() => (window.location.href = "/register")}
+                    onClick={() =>
+                      window.open(
+                        "https://wa.me/966547477545",
+                        "_blank",
+                        "noopener,noreferrer",
+                      )
+                    }
                     className="px-6 py-3.5 rounded-xl bg-brand-navy hover:bg-brand-gold text-white hover:text-brand-navy font-black text-sm transition-all shadow-lg hover:shadow-brand-navy/20 cursor-pointer"
                   >
                     حجز المقعد وبدء الدراسة فوراً

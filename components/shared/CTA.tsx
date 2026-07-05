@@ -6,7 +6,6 @@ const CTA = memo(function CTA() {
     <section className="w-full py-16 px-6 bg-white relative z-10 text-right overflow-hidden">
       <div className="max-w-7xl mx-auto relative">
         <div className="relative w-full rounded-[2.5rem] bg-brand-navy text-white px-8 py-16 sm:p-16 overflow-hidden shadow-[0_30px_70px_-20px_rgba(22,46,68,0.3)] transform-gpu">
-          {/* الخلفيات الجمالية */}
           <div className="absolute top-0 left-0 w-96 h-96 bg-brand-gold/10 rounded-full filter blur-[100px] pointer-events-none" />
           <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-white/5 rounded-full filter blur-[80px] pointer-events-none" />
 
@@ -44,14 +43,14 @@ const CTA = memo(function CTA() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
-                href="/register"
-                className="w-full sm:w-auto px-10 py-[18px] rounded-2xl bg-brand-gold text-brand-navy font-black text-base hover:bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 text-center cursor-pointer shadow-lg shadow-brand-gold/10"
+                href="https://wa.me/966547477545"
+                target="_blank"
+                className="w-full sm:w-auto px-10 py-4.5 rounded-2xl bg-brand-gold text-brand-navy font-black text-base hover:bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 text-center cursor-pointer shadow-lg shadow-brand-gold/10"
               >
                 اشترك الآن وابدء فوراً
               </Link>
             </div>
 
-            {/* تحديث بنود الميزات السفلية */}
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-2 pt-6 text-xs font-bold text-white/40">
               <div className="flex items-center gap-1.5">
                 ✓ تحديثات شاملة ومستمرة لتجمعات ١٤٤٧
