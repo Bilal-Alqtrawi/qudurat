@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Logo() {
   return (
     <Image
-      src="/logo-2.png"
+      src="/logo.png"
       alt="قدرات أ. ريناد"
       width={100}
       height={100}

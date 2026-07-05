@@ -1,26 +1,38 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff; /* خلفية بيضاء نقية */
-  --foreground: #162e44; /* لون النص الرئيسي مطابق للوجو */
+  --background: #ffffff;
+  --foreground: #162e44;
 }
 
 @theme inline {
-  --color-brand-navy: #162e44; /* كحلي اللوجو */
-  --color-brand-gold: #f4a214; /* ذهبي القوس */
-  --color-brand-gray: #8f9eaf; /* رمادي صفحات الكتاب */
-  --color-brand-light: #f8fafc; /* خلفية البطاقات الفاتحة */
+  --color-brand-navy: #162e44;
+  --color-brand-gold: #f4a214;
+  --color-brand-gray: #8f9eaf;
+  --color-brand-light: #f8fafc;
 
   --font-tajawal: var(--font-tajawal), system-ui, -apple-system, sans-serif;
 
-  /* حركات الأنيميشن المخصصة */
+  --font-thmanyah: var(--font-thmanyah);
+
   --animate-float: float 6s ease-in-out infinite;
   --animate-blob: blob 7s infinite;
   --animate-wave: wave 10s linear infinite;
   --animate-fade-up: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* تعريف الـ Keyframes للحركات الاحترافية */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-thmanyah);
+    @apply font-black;
+  }
+}
+
 @keyframes float {
   0% {
     transform: translateY(0px);
@@ -67,13 +79,11 @@ body {
   scroll-behavior: smooth;
 }
 
-/* شكل جمالي للتحديد (Selection) */
 ::selection {
   background-color: #f4a214;
   color: #ffffff;
 }
 
-/* تريكات خلفية متعرجة خفيفة جداً */
 .bg-grid-pattern {
   background-image: radial-gradient(#8f9eaf 1px, transparent 1px);
   background-size: 32px 32px;

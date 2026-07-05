@@ -1,4 +1,6 @@
 import { Tajawal } from "next/font/google";
+import localFont from "next/font/local";
+
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -6,6 +8,32 @@ const tajawal = Tajawal({
   subsets: ["arabic"],
   variable: "--font-tajawal",
   weight: ["300", "400", "500", "700", "900"],
+});
+
+const thmanyah = localFont({
+  src: [
+    {
+      path: "../public/fonts/thmanyah-regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/thmanyah-medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/thmanyah-bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/thmanyah-black.woff2",
+      weight: "900",
+      style: "normal",
+    },
+  ],
+  variable: "--font-thmanyah",
 });
 
 export const metadata: Metadata = {
@@ -39,7 +67,7 @@ export const metadata: Metadata = {
     siteName: "منصة أ. ريناد ناصر",
     images: [
       {
-        url: "/logo-2.png",
+        url: "/logo.png",
         width: 800,
         height: 600,
         alt: "لوجو منصة الأستاذة ريناد ناصر",
@@ -53,7 +81,7 @@ export const metadata: Metadata = {
     title: "منصة الأستاذة ريناد ناصر | تأسيس القدرات والتحصيلي",
     description:
       "تأسيس ذكي، برامج مباشرة فردية وجماعية، وضمان جودة الطرح للوصول لأعلى الدرجات.",
-    images: ["/logo-2.png"],
+    images: ["/logo.png"],
   },
   robots: {
     index: true,
@@ -70,7 +98,7 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${tajawal.variable} h-full antialiased scroll-smooth`}
+      className={`${tajawal.variable} ${thmanyah.variable} h-full antialiased scroll-smooth`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">{children}</body>

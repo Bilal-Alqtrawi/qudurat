@@ -25,10 +25,12 @@ interface Review {
   date: string;
 }
 
+type CourseType = "recorded" | "live";
+
 interface Course {
   id: number;
   title: string;
-  type: "recorded" | "live" | "consultation" | "soon";
+  type: CourseType;
   shortDesc: string;
   longDesc: string;
   features: string[];
@@ -60,7 +62,7 @@ const INITIAL_COURSES: Course[] = [
       "اختبارات تدريبية مكثفة بعد كل ملف، ومع الأستاذة ريناد التأسيس مضمون بجيبك.",
       "ميزة خاصة: إذا كنت غير متأسس، يمكنك دخول دورات التأسيس مجاناً.",
     ],
-    image: "/logo-2.png",
+    image: "/logo.png",
   },
   {
     id: 2,
@@ -86,51 +88,15 @@ const INITIAL_COURSES: Course[] = [
       "للطالب أو الطالبة حرية الانسحاب، ولا يوجد ضمان للدرجات أو استرجاع للرسوم المدفوعة.",
       "في حال حدوث ظرف طارئ خاص بالمعلمة، لا يُشترط عليها الإكمال وتُسوى الرسوم.",
     ],
-    image: "/logo-2.png",
-  },
-  {
-    id: 3,
-    title: "برنامج الاستشارات الخاصة وبناء الخطة السبعية",
-    type: "consultation",
-    shortDesc:
-      "جلسة استشارة مباشرة عبر زوم مدتها ساعة كاملة لرسم خطة عمل دقيقة ومتابعتها يومياً.",
-    longDesc:
-      "جلسة تخطيط استراتيجي مخصصة نضع فيها خطة متكاملة للطالب أو الطالبة لمدة 7 أيام متتالية، لتمكينك من الدراسة الذاتية المنظمة مع خضوعك لرقابة ومتابعة تصحيحية مستمرة لضمان تحقيق أهدافك الأكاديمية.",
-    price: "399 ر.س",
-    duration: "جلسة زوم ساعة كاملة + خطة ومتابعة حازمة لمدة 7 أيام متتالية",
-    features: [
-      "تجهيز الخطة اليومية: نحدد المقدار اليومي من ملفات وفيديوهات واختبارات ليدخل الطالب ويحلها.",
-      "قروبات المتابعة: نفتح قروبات متابعة خاصة ومستقلة لكل مشترك وننزل فيها كل المحتوى المطلوب.",
-      "الالتزام اليومي: يحل الطالب أو الطالبة الواجب المحدد في الاستشارة ويرسله قبل الساعة 12 بالليل.",
-      "متابعة المعلمة اليومية: تدخل المعلمة على القروبات الخاصة لتتابع وتقيم أداء المشترك بدقة.",
-      "التقييم والتجديد: بعد سبعة أيام نختبر المشترك اختبار بسيط، وعند تجديد الرسوم نضع خطة الـ 7 أيام التالية.",
-    ],
-    image: "/logo-2.png",
-  },
-  {
-    id: 4,
-    title: "دورة البث المباشر لكتاب المعاصر 10 (الإصدار الجديد)",
-    type: "soon",
-    shortDesc:
-      "قريباً جداً | يتم العمل حالياً على إطلاق الدورة المحدثة لمواكبة أحدث صيغ قياس.",
-    longDesc:
-      "نعمل حالياً خلف الكواليس لتجهيز دورة تفاعلية شاملة مبنية بالكامل على كتاب المعاصر 10 الجديد، لتغطية كافة الأنماط المحدثة ومسائل المقارنة والهندسة لضمان استعدادكم الكامل للاختبار القادم.",
-    price: "يُعلن عنها قريباً",
-    features: [
-      "الشرح الكامل والجامع لأحدث صيغ وتعديلات كتاب المعاصر 10.",
-      "تكتيكات متطورة لحل مسائل الكمي والمقارنات المعقدة في ثوانٍ معدودة.",
-      "بث مباشر تفاعلي جماعي يتيح للطلاب والطالبات النقاش وحل الاستفسارات ودياً.",
-    ],
-    image: "/logo-2.png",
+    image: "/logo.png",
   },
 ];
 
 export default function FeaturedCourses() {
-  const [activeTab, setActiveTab] = useState<
-    "all" | "recorded" | "live" | "consultation"
-  >("all");
+  const [activeTab, setActiveTab] = useState<CourseType>("recorded");
+  const [visibleCount, setVisibleCount] = useState(4);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
-  const [mounted, setMounted] = useState(false); // للتأكد من التحميل في المتصفح قبل تشغيل الـ Portal
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -234,7 +200,6 @@ export default function FeaturedCourses() {
       dir="rtl"
     >
       <div className="max-w-7xl mx-auto space-y-12">
-        {/* هيدر القسم */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-light border border-slate-100 text-[11px] font-bold text-brand-gold mx-auto">
             <Sparkles className="w-3.5 h-3.5 text-brand-gold" />
@@ -250,13 +215,11 @@ export default function FeaturedCourses() {
           </p>
         </div>
 
-        {/* أزرار الفلترة الذكية */}
         <div className="flex flex-wrap justify-center gap-3 pt-2">
           {[
             { id: "all", label: "جميع المسارات" },
-            { id: "recorded", label: "الحقائب الرقمية المسجلة" },
+            { id: "recorded", label: "المُسجلة والإستشارات" },
             { id: "live", label: "البث المباشر والـ VIP" },
-            { id: "consultation", label: "الاستشارات والتخطيط" },
           ].map((tab) => (
             <button
               key={tab.id}
@@ -272,7 +235,6 @@ export default function FeaturedCourses() {
           ))}
         </div>
 
-        {/* شبكة عرض كروت البرامج */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-6">
           {filteredCourses.map((course) => {
             const reviews = courseReviews[course.id] || [];
@@ -630,6 +592,17 @@ export default function FeaturedCourses() {
           </div>,
           document.body,
         )}
+
+      {visibleCount < filteredCourses.length && (
+        <div className="text-center mt-12">
+          <button
+            onClick={() => setVisibleCount((prev) => prev + 4)}
+            className="px-8 py-4 rounded-2xl bg-brand-light text-brand-navy font-bold hover:bg-brand-gold hover:text-white transition-all"
+          >
+            عرض المزيد من الدورات
+          </button>
+        </div>
+      )}
     </section>
   );
 }

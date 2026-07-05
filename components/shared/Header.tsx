@@ -9,7 +9,7 @@ import { ArrowLeft, Menu, X } from "lucide-react";
 const navLinks = [
   { name: "الرئيسية", href: "/" },
   { name: "عن المدربة", href: "/#about" },
-  { name: "الدورات والبرامج", href: "/#courses" },
+  { name: "الدورات والبرامج", href: "/courses" },
   { name: "الأسئلة الشائعة", href: "/faq" },
 ];
 
