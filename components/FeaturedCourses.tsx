@@ -190,7 +190,7 @@ export default function FeaturedCourses() {
   };
 
   const filteredCourses = INITIAL_COURSES.filter(
-    (course) => activeTab === "all" || course.type === activeTab,
+    (course) => course.type === activeTab,
   );
 
   return (
@@ -273,10 +273,6 @@ export default function FeaturedCourses() {
                     {course.type === "recorded" && (
                       <BookOpen className="w-3 h-3" />
                     )}
-                    {course.type === "consultation" && (
-                      <Calendar className="w-3 h-3" />
-                    )}
-                    {course.type === "soon" && <Clock className="w-3 h-3" />}
                     {course.type === "live"
                       ? "بث مباشر تفاعلي مخصص"
                       : course.type === "recorded"
@@ -355,11 +351,7 @@ export default function FeaturedCourses() {
                 <div className="space-y-1.5">
                   <span className="inline-flex items-center gap-1 px-3 py-1 bg-brand-gold/10 text-brand-gold rounded-full text-xs font-black">
                     <Sparkles className="w-3 h-3 text-brand-gold" />
-                    <span>
-                      {selectedCourse.type === "soon"
-                        ? "تطوير مستمر"
-                        : "نظرة تفصيلية على البرنامج"}
-                    </span>
+                    <span>نظرة تفصيلية على البرنامج</span>
                   </span>
                   <h3 className="text-xl sm:text-2xl font-black text-brand-navy leading-snug pl-8">
                     {selectedCourse.title}
@@ -565,28 +557,18 @@ export default function FeaturedCourses() {
                     {selectedCourse.price}
                   </span>
                 </div>
-
-                {selectedCourse.type !== "soon" ? (
-                  <button
-                    onClick={() =>
-                      window.open(
-                        "https://wa.me/966547477545",
-                        "_blank",
-                        "noopener,noreferrer",
-                      )
-                    }
-                    className="px-6 py-3.5 rounded-xl bg-brand-navy hover:bg-brand-gold text-white hover:text-brand-navy font-black text-sm transition-all shadow-lg hover:shadow-brand-navy/20 cursor-pointer"
-                  >
-                    حجز المقعد وبدء الدراسة فوراً
-                  </button>
-                ) : (
-                  <button
-                    disabled
-                    className="px-6 py-3.5 rounded-xl bg-slate-200 text-slate-500 font-black text-sm cursor-not-allowed"
-                  >
-                    قيد العمل والتجهيز حالياً
-                  </button>
-                )}
+                <button
+                  onClick={() =>
+                    window.open(
+                      "https://wa.me/966547477545",
+                      "_blank",
+                      "noopener,noreferrer",
+                    )
+                  }
+                  className="px-6 py-3.5 rounded-xl bg-brand-navy hover:bg-brand-gold text-white hover:text-brand-navy font-black text-sm transition-all shadow-lg hover:shadow-brand-navy/20 cursor-pointer"
+                >
+                  حجز المقعد وبدء الدراسة فوراً
+                </button>
               </div>
             </div>
           </div>,
