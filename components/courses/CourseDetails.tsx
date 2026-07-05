@@ -404,7 +404,8 @@ export default function CourseDetails({
             </div>
 
             <Link
-              href="/register"
+              href="https://wa.me/966547477545"
+              target="_blank"
               className="btn-gold-gradient w-full py-3.5 rounded-xl font-black text-sm flex items-center justify-center gap-2"
             >
               <span>احجز مقعدك الآن</span>
