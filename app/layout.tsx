@@ -3,6 +3,8 @@ import localFont from "next/font/local";
 
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "@/components/shared/Header";
+import Footer from "@/components/shared/Footer";
 
 const tajawal = Tajawal({
   subsets: ["arabic"],
@@ -101,7 +103,11 @@ export default function RootLayout({
       className={`${tajawal.variable} ${thmanyah.variable} h-full antialiased scroll-smooth`}
       suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }

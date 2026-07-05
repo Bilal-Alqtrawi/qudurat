@@ -2,6 +2,15 @@
 
 import { useState, memo } from "react";
 import Link from "next/link";
+import {
+  TrendingUp,
+  Award,
+  Users,
+  CheckCircle2,
+  ArrowLeft,
+  Trophy,
+  ChartSpline,
+} from "lucide-react";
 
 const StaticWavyBackground = memo(function StaticWavyBackground() {
   return (
@@ -134,12 +143,12 @@ export default function Hero() {
             </span>{" "}
             <br />
             يبدأ من خطوة{" "}
-            <span className="relative inline-block bg-clip-text py-2">
+            <span className="relative inline-block bg-clip-text py-2 text-[#d08503]">
               تأسيس ذكي
             </span>
           </h1>
 
-          <p className="text-brand-gray text-base sm:text-lg font-medium max-w-2xl leading-relaxed">
+          <p className="text-brand-gray font-semibold  text-base sm:text-lg max-w-2xl leading-relaxed">
             نركز على تفكيك العقد الرياضية ومسائل المقارنات والهندسة ببناء
             أكاديمي راسخ يحول القوانين الطويلة إلى مهارات وحلول تفاعلية بديهية
             فائقة السرعة.
@@ -192,7 +201,7 @@ export default function Hero() {
               <div className="p-4 rounded-2xl bg-white border border-slate-100 flex items-center justify-between shadow-xs hover:border-brand-gold/30 transition-all">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-xl bg-brand-light flex items-center justify-center text-brand-gold">
-                    🏆
+                    <Trophy size={20} />
                   </div>
                   <div className="text-right">
                     <h5 className="text-xs font-black text-brand-navy">
@@ -209,7 +218,7 @@ export default function Hero() {
               <div className="p-4 rounded-2xl bg-white border border-slate-100 flex items-center justify-between shadow-xs hover:border-brand-gold/30 transition-all">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
-                    📈
+                    <ChartSpline size={20} />
                   </div>
                   <div className="text-right">
                     <h5 className="text-xs font-black text-brand-navy">

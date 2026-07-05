@@ -7,7 +7,6 @@ import {
   BookOpen,
   Video,
   Sparkles,
-  Calendar,
   AlertTriangle,
   CheckCircle,
   Star,
@@ -17,89 +16,36 @@ import {
   ChevronLeft,
   Clock,
 } from "lucide-react";
+import Select from "@/components/ui/Select";
+import {
+  INITIAL_COURSES,
+  INITIAL_REVIEWS,
+  getAverageRating,
+  type Course,
+  type CourseType,
+  type Review,
+} from "@/data/courses-data";
 
-interface Review {
-  name: string;
-  rating: number;
-  comment: string;
-  date: string;
-}
+export { INITIAL_COURSES };
 
-type CourseType = "recorded" | "live";
-
-interface Course {
-  id: number;
-  title: string;
-  type: CourseType;
-  shortDesc: string;
-  longDesc: string;
-  features: string[];
-  rules?: string[];
-  price: string;
-  oldPrice?: string;
-  duration?: string;
-  image: string;
-}
-
-const INITIAL_COURSES: Course[] = [
-  {
-    id: 1,
-    title: "رسوم التأسيس الشامل (كمي + لفظي) - الحقيبة الرقمية",
-    type: "recorded",
-    shortDesc:
-      "فيديوهات قصيرة من الصفر مع ملخص شامل لكتاب المعاصر وتأسيس اللفظي المتكامل.",
-    longDesc:
-      "التأسيس بشرح يفتح النفس، ونتحدى أن تخرج من الدورة دون أن تكون فاهماً لكل المبادئ إن شاء الله. يتضمن المنهج شروحات مبسطة ومقسمة من الصفر (Zero) لتأهيل الطلاب والطالبات بالترتيب الكامل للقسمين الكمي واللفظي.",
-    price: "199 ر.س",
-    oldPrice: "249 ر.س",
-    duration:
-      "مدة الاشتراك: 3 أشهر (ويمكن إنجازه في 3 أسابيع إلى شهر ونص أو أقل حسب جهدك)",
-    features: [
-      "فيديوهات مدتها قصيرة ومبسطة لشرح كل الأسئلة in الكتاب بسلاسة.",
-      "تأسيس متكامل مبني على كتاب المعاصر وتأسيس اللفظي.",
-      "تقسيم المنهج إلى 6 أقسام شاملة ومقترنة بملفات تدريبية مخصصة.",
-      "أكثر من 1000 سؤال كمي ومحوسب لضمان الفهم التام وطرق الحل السريعة.",
-      "اختبارات تدريبية مكثفة بعد كل ملف، ومع الأستاذة ريناد التأسيس مضمون بجيبك.",
-      "ميزة خاصة: إذا كنت غير متأسس، يمكنك دخول دورات التأسيس مجاناً.",
-    ],
-    image: "/logo.png",
-  },
-  {
-    id: 2,
-    title: "برنامج البث المباشر الخاص والتوجيه الفردي عبر زوم",
-    type: "live",
-    shortDesc:
-      "حصص تفاعلية مباشرة عبر الزوم خاصة بطالب واحد أو طالبة واحدة فقط لتركيز مطلق.",
-    longDesc:
-      "برنامج تعليمي مكثف وفردي بالكامل، يغطي التأسيس الشامل من كتاب المعاصر وتأسيس اللفظي، يليه تدريب شامل ومكثف للقسمين (الكمي واللفظي) يستمر معك حتى يوم الاختبار الفعلي لضمان الجاهزية التامة.",
-    price: "600 ر.س / أسبوعياً",
-    duration:
-      "على مدار 3 حصص أسبوعية مع واجبات يومية ومتابعة دقيقة خلال الأسبوع",
-    features: [
-      "بث مباشر فردي مخصص بالكامل لطالب واحد فقط عبر منصة زوم.",
-      "المحتوى المعتمد: كتاب المعاصر + التأسيس اللفظي بالكامل.",
-      "تدريب شامل ومستمر للقسمين الكمي واللفظي يمتد حتى يوم اختبارك الرسمي.",
-      "تزويد المشتركين بأحدث التسريبات والأسئلة لضمان التفوق.",
-      "الميزة الكبرى: متابعة مستمرة ورسم الخطة الدراسية كاملة حتى يوم الاختبار.",
-      "قصص نجاح حقيقية: ارتفعت درجات المشتركين بفضل الله من سقف الخمسينات إلى التسعينات.",
-    ],
-    rules: [
-      "الالتزام التام بالمذاكرة والحل مطلوب (يحق للأستاذة استبعاد غير الملتزمين بالخطة).",
-      "للطالب أو الطالبة حرية الانسحاب، ولا يوجد ضمان للدرجات أو استرجاع للرسوم المدفوعة.",
-      "في حال حدوث ظرف طارئ خاص بالمعلمة، لا يُشترط عليها الإكمال وتُسوى الرسوم.",
-    ],
-    image: "/logo.png",
-  },
+const RATING_OPTIONS = [
+  { value: "5", label: "★★★★★ مميز جداً (5/5)" },
+  { value: "4", label: "★★★★☆ رائع ويستحق (4/5)" },
+  { value: "3", label: "★★★☆☆ متوسط المقارنة (3/5)" },
+  { value: "2", label: "★★☆☆☆ يحتاج بعض الملفات (2/5)" },
+  { value: "1", label: "★☆☆☆☆ غير راضٍ (1/5)" },
 ];
 
 export default function FeaturedCourses() {
-  const [activeTab, setActiveTab] = useState<CourseType>("recorded");
+  const [activeTab, setActiveTab] = useState<"all" | CourseType>("all");
   const [visibleCount, setVisibleCount] = useState(4);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    setTimeout(() => {
+      setMounted(true);
+    }, 10);
   }, []);
 
   useEffect(() => {
@@ -119,33 +65,7 @@ export default function FeaturedCourses() {
 
   const [courseReviews, setCourseReviews] = useState<{
     [key: number]: Review[];
-  }>({
-    1: [
-      {
-        name: "أحمد السديري",
-        rating: 5,
-        comment:
-          "الشرح يفتح النفس فعلاً والفيديوهات قصيرة وماتحس بالوقت وأنت تدرس.",
-        date: "2026-06-18",
-      },
-      {
-        name: "نورة التميمي",
-        rating: 5,
-        comment:
-          "ملخص المعاصر واللفظي شامل جداً، والأسئلة المقسمة رتبت لي معلوماتي.",
-        date: "2026-06-25",
-      },
-    ],
-    2: [
-      {
-        name: "فيصل الحربي",
-        rating: 5,
-        comment:
-          "كنت بالخمسينات والحمد لله بعد المتابعة الفردية والالتزام بالواجبات قفزت فوق الـ 94. تجربة استثنائية!",
-        date: "2026-05-30",
-      },
-    ],
-  });
+  }>(INITIAL_REVIEWS);
 
   const [reviewName, setReviewName] = useState("");
   const [reviewComment, setReviewComment] = useState("");
@@ -189,9 +109,10 @@ export default function FeaturedCourses() {
     setShowReviewForm(false);
   };
 
-  const filteredCourses = INITIAL_COURSES.filter(
-    (course) => course.type === activeTab,
-  );
+  const filteredCourses =
+    activeTab === "all"
+      ? INITIAL_COURSES
+      : INITIAL_COURSES.filter((course) => course.type === activeTab);
 
   return (
     <section
@@ -216,14 +137,16 @@ export default function FeaturedCourses() {
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 pt-2">
-          {[
-            { id: "all", label: "جميع المسارات" },
-            { id: "recorded", label: "المُسجلة والإستشارات" },
-            { id: "live", label: "البث المباشر والـ VIP" },
-          ].map((tab) => (
+          {(
+            [
+              { id: "all", label: "جميع المسارات" },
+              { id: "recorded", label: "المُسجلة والإستشارات" },
+              { id: "live", label: "البث المباشر والـ VIP" },
+            ] as const
+          ).map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
+              onClick={() => setActiveTab(tab.id)}
               className={`px-6 py-3 rounded-full text-xs sm:text-sm font-black transition-all duration-300 cursor-pointer border ${
                 activeTab === tab.id
                   ? "bg-brand-navy text-white border-brand-navy shadow-lg shadow-brand-navy/10"
@@ -238,11 +161,7 @@ export default function FeaturedCourses() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 pt-6">
           {filteredCourses.map((course) => {
             const reviews = courseReviews[course.id] || [];
-            const avgRating = reviews.length
-              ? (
-                  reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
-                ).toFixed(1)
-              : "5.0";
+            const avgRating = getAverageRating(reviews);
 
             return (
               <div
@@ -457,23 +376,12 @@ export default function FeaturedCourses() {
                           <label className="text-xs font-black text-brand-navy block">
                             التقييم العام:
                           </label>
-                          <select
-                            value={reviewRating}
-                            onChange={(e) =>
-                              setReviewRating(Number(e.target.value))
-                            }
-                            className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs font-black focus:outline-none focus:border-brand-gold text-right"
-                          >
-                            <option value={5}>★★★★★ مميز جداً (5/5)</option>
-                            <option value={4}>★★★★☆ رائع ويستحق (4/5)</option>
-                            <option value={3}>
-                              ★★★☆☆ متوسط المقارنة (3/5)
-                            </option>
-                            <option value={2}>
-                              ★★☆☆☆ يحتاج بعض الملفات (2/5)
-                            </option>
-                            <option value={1}>★☆☆☆☆ غير راضٍ (1/5)</option>
-                          </select>
+                          <Select
+                            size="sm"
+                            options={RATING_OPTIONS}
+                            value={String(reviewRating)}
+                            onChange={(v) => setReviewRating(Number(v))}
+                          />
                         </div>
                       </div>
 

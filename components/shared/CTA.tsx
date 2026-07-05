@@ -31,7 +31,7 @@ const CTA = memo(function CTA() {
 
             {/* تحديث النص لصيغة المؤنث المباشر */}
             <h2 className="text-3xl sm:text-5xl font-black leading-tight tracking-tight">
-              هل أنت مستعد لتكون نجمة المنصة القادمة وتحقق{" "}
+              هل أنت مستعد لتكون نجم المنصة القادمة وتحقق{" "}
               <span className="text-brand-gold font-black">الـ +٩٥؟</span>
             </h2>
 

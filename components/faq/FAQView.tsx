@@ -115,8 +115,8 @@ export default function FAQView() {
               إجابته هنا
             </h1>
             <p className="text-brand-gray text-sm sm:text-base font-medium max-w-xl mx-auto">
-              كل ما تودين معرفته عن آلية التدريب والتسجيل في المنصة لتنطلقي بثقة
-              نحو هدفكِ.[cite: 21]
+              كل ما تود معرفته عن آلية التدريب والتسجيل في المنصة لتنطلق بثقة
+              نحو هدفكِ.
             </p>
           </div>
 

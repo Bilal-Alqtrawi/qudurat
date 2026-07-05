@@ -2,7 +2,7 @@ const credentials = [
   {
     title: "٣ دبلومات معتمدة",
     desc: "متخصصة في إعداد وتأهيل مدربات القدرات والتحصيلي الاحترافيات وفق معايير قياس الحديثة.",
-    pdfUrl: "/docs/me-academy.pdf",
+    pdfUrl: "/docs/ريناد ناصر.pdf",
     accent: "from-amber-500/20 to-brand-gold/10",
     icon: (
       <svg
@@ -50,7 +50,7 @@ const credentials = [
   {
     title: "أكاديمية الشرق الأوسط",
     desc: "عضوية تدريبية دولية معتمدة لضمان تطبيق أعلى معايير جودة المناهج للقدرات بشقيها.",
-    pdfUrl: "/docs/me-academy.pdf",
+    pdfUrl: "/docs/MEATD.pdf",
     accent: "from-teal-500/10 to-emerald-500/10",
     icon: (
       <svg
@@ -71,7 +71,7 @@ const credentials = [
   {
     title: "المعهد الأمريكي (AIPS)",
     desc: "اعتماد احترافي دولي في صياغة استراتيجيات وبناء بيئات التعليم الرقمي التفاعلي المبتكر.",
-    pdfUrl: "/docs/me-academy.pdf",
+    pdfUrl: "/docs/AID.pdf",
     accent: "from-purple-500/10 to-pink-500/10",
     icon: (
       <svg

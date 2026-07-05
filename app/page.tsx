@@ -1,4 +1,3 @@
-import Header from "@/components/shared/Header";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import About from "@/components/About";
@@ -7,14 +6,11 @@ import FeaturedCourses from "@/components/FeaturedCourses";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import MiniFAQ from "@/components/MiniFAQ";
 import CTA from "@/components/shared/CTA";
-import Footer from "@/components/shared/Footer";
 import ScrollFade from "@/components/ui/ScrollFade";
 
 export default function Home() {
   return (
     <div className="transition-all duration-300 relative w-full min-h-screen flex flex-col bg-white antialiased">
-      <Header />
-
       <main className="w-full grow">
         <ScrollFade>
           <Hero />
@@ -48,8 +44,6 @@ export default function Home() {
           <CTA />
         </ScrollFade>
       </main>
-
-      <Footer />
     </div>
   );
 }
