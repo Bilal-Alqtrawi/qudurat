@@ -111,7 +111,7 @@ function TrackItem({ track }: { track: TrackProps }) {
         target="_blank"
         className="mt-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white group-hover:bg-brand-gold text-brand-navy group-hover:text-brand-navy font-black text-xs shadow-xs hover:shadow-md transition-all duration-400 cursor-pointer border border-slate-100/80 group-hover:border-transparent outline-0"
       >
-        سجل الآن وابدئي رحلتكِ
+        سجل الآن وابدء رحلتك
         <span className="text-sm transition-transform duration-300 group-hover:-translate-x-0.75">
           ←
         </span>

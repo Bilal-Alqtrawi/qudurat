@@ -2,24 +2,17 @@
 
 import { useState, memo } from "react";
 import Link from "next/link";
-import {
-  TrendingUp,
-  Award,
-  Users,
-  CheckCircle2,
-  ArrowLeft,
-  Trophy,
-  ChartSpline,
-} from "lucide-react";
+import { Trophy, ChartSpline } from "lucide-react";
+import SearchBar from "./SearchBar";
 
 const StaticWavyBackground = memo(function StaticWavyBackground() {
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none bg-white">
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-brand-gold/5 rounded-full filter blur-[120px]" />
-      <div className="absolute bottom-10 left-1/4 w-[600px] h-[600px] bg-brand-light rounded-full filter blur-[100px]" />
+      <div className="absolute top-0 right-1/4 w-125 h-125 bg-brand-gold/5 rounded-full filter blur-[120px]" />
+      <div className="absolute bottom-10 left-1/4 w-150 h-150 bg-brand-light rounded-full filter blur-[100px]" />
 
       <svg
-        className="absolute bottom-0 left-0 w-full h-[70%] min-h-[500px] text-brand-light"
+        className="absolute bottom-0 left-0 w-full h-[70%] min-h-125 text-brand-light"
         viewBox="0 0 1440 800"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -34,82 +27,6 @@ const StaticWavyBackground = memo(function StaticWavyBackground() {
           className="fill-brand-gold/2.5"
         />
       </svg>
-    </div>
-  );
-});
-
-const SearchBar = memo(function SearchBar({
-  query,
-  setQuery,
-}: {
-  query: string;
-  setQuery: (val: string) => void;
-}) {
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!query.trim()) return;
-    console.log("Searching for:", query);
-  };
-
-  return (
-    <div className="max-w-xl pt-2">
-      <form
-        onSubmit={handleSearchSubmit}
-        className="relative flex items-center p-2 rounded-3xl bg-white border border-slate-100 shadow-[0_15px_40px_-15px_rgba(22,46,68,0.06)] focus-within:border-brand-gold/60 focus-within:shadow-[0_20px_40px_-15px_rgba(244,162,21,0.1)] transition-all duration-300"
-      >
-        <div className="flex-1 flex items-center gap-3 px-3">
-          <svg
-            className="w-5 h-5 text-brand-navy/40 shrink-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2.5}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-          <input
-            type="text"
-            placeholder="ماذا تريد أن تتعلم اليوم؟ (كمي، مقارنات، ورقي ١٤٤٧...)"
-            className="w-full bg-transparent border-none text-brand-navy placeholder:text-brand-navy/30 text-sm font-bold focus:outline-none text-right"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            suppressHydrationWarning
-          />
-        </div>
-        <button
-          type="submit"
-          className="px-6 py-3 rounded-2xl bg-brand-navy text-white text-xs sm:text-sm font-black hover:bg-brand-gold hover:text-brand-navy transition-all duration-300 cursor-pointer shadow-xs"
-        >
-          ابحث عن دورة
-        </button>
-      </form>
-
-      {/* الوسوم الأكثر طلباً المحدثة بناءً على الفيديوهات */}
-      <div className="flex flex-wrap items-center gap-2 mt-4 px-2">
-        <span className="text-xs font-bold text-brand-gray/60">
-          الوسوم الشائعة:
-        </span>
-        {[
-          "تجميعات ورقي ١٤٤٧",
-          "استراتيجيات المقارنة",
-          "تأسيس هندسة بالرسم",
-          "نماذج المحوسب الجديدة",
-        ].map((tag, idx) => (
-          <button
-            key={idx}
-            type="button"
-            onClick={() => setQuery(tag)}
-            className="text-[11px] font-bold text-brand-navy/70 bg-brand-light hover:bg-brand-gold/10 hover:text-brand-gold rounded-full px-3 py-1 transition-all border border-slate-50 cursor-pointer"
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
     </div>
   );
 });
@@ -174,7 +91,7 @@ export default function Hero() {
         </div>
 
         <div className="lg:col-span-5 relative hidden lg:block">
-          <div className="relative mx-auto max-w-[380px] p-6 rounded-[2.5rem] bg-gradient-to-b from-white to-brand-light border border-slate-100 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.08)] backdrop-blur-md">
+          <div className="relative mx-auto max-w-95 p-6 rounded-[2.5rem] bg-linear-to-b from-white to-brand-light border border-slate-100 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.08)] backdrop-blur-md">
             <div className="rounded-3xl overflow-hidden bg-brand-navy p-5 text-white relative shadow-inner space-y-4">
               <div className="flex justify-between items-center">
                 <span className="px-2.5 py-1 rounded-md bg-rose-500 text-[10px] font-black tracking-wide animate-pulse uppercase">

@@ -20,21 +20,13 @@ import Select from "@/components/ui/Select";
 import {
   INITIAL_COURSES,
   INITIAL_REVIEWS,
+  RATING_OPTIONS,
   getAverageRating,
   type Course,
   type CourseType,
   type Review,
 } from "@/data/courses-data";
-
-export { INITIAL_COURSES };
-
-const RATING_OPTIONS = [
-  { value: "5", label: "★★★★★ مميز جداً (5/5)" },
-  { value: "4", label: "★★★★☆ رائع ويستحق (4/5)" },
-  { value: "3", label: "★★★☆☆ متوسط المقارنة (3/5)" },
-  { value: "2", label: "★★☆☆☆ يحتاج بعض الملفات (2/5)" },
-  { value: "1", label: "★☆☆☆☆ غير راضٍ (1/5)" },
-];
+import Link from "next/link";
 
 export default function FeaturedCourses() {
   const [activeTab, setActiveTab] = useState<"all" | CourseType>("all");
@@ -201,13 +193,13 @@ export default function FeaturedCourses() {
                           : "قريباً جداً"}
                   </span>
 
-                  <div className="absolute bottom-3 left-4 flex items-center gap-1 bg-white px-2.5 py-1 rounded-full border border-slate-100 text-[11px] font-black text-brand-navy shadow-2xs">
+                  {/* <div className="absolute bottom-3 left-4 flex items-center gap-1 bg-white px-2.5 py-1 rounded-full border border-slate-100 text-[11px] font-black text-brand-navy shadow-2xs">
                     <Star className="w-3 h-3 text-brand-gold fill-brand-gold" />
                     <span>{avgRating}</span>
                     <span className="text-brand-gray/60 font-bold">
                       ({reviews.length})
                     </span>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="p-8 flex-1 flex flex-col justify-between space-y-6 text-right">
@@ -238,13 +230,33 @@ export default function FeaturedCourses() {
                       </span>
                     </div>
 
-                    <button
-                      onClick={() => setSelectedCourse(course)}
+                    <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+                      <Link
+                        href={`/courses/${course.id}`}
+                        className="px-4 py-3 rounded-xl bg-brand-light hover:bg-brand-navy text-brand-navy hover:text-white text-xs font-black transition-all duration-300 cursor-pointer border border-transparent flex items-center gap-1 hover:shadow-md"
+                      >
+                        <span>التفاصيل</span>
+                      </Link>
+
+                      <Link
+                        href={`https://wa.me/966XXXXXXXXX?text=${encodeURIComponent(
+                          `السلام عليكم أ.ريناد،\nأريد التسجيل في: ${course.title} 🚀`,
+                        )}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-black transition-all duration-300 flex items-center gap-1.5 shadow-md hover:shadow-lg"
+                      >
+                        <MessageSquare className="w-3.5 h-3.5" />
+                        <span>تسجيل سريع</span>
+                      </Link>
+                    </div>
+                    {/*           <Link
+                      href={`/courses/${course.id}`}
                       className="px-5 py-3 rounded-xl bg-brand-light hover:bg-brand-navy text-brand-navy hover:text-white text-xs font-black transition-all duration-300 cursor-pointer border border-transparent flex items-center gap-1 hover:shadow-md"
                     >
-                      <span>عرض التفاصيل والآراء</span>
+                      <span>عرض التفاصيل</span>
                       <ChevronLeft className="w-3.5 h-3.5" />
-                    </button>
+                    </Link> */}
                   </div>
                 </div>
               </div>
@@ -252,236 +264,6 @@ export default function FeaturedCourses() {
           })}
         </div>
       </div>
-
-      {selectedCourse &&
-        mounted &&
-        createPortal(
-          <div
-            onClick={(e) => {
-              if (e.target === e.currentTarget) {
-                setSelectedCourse(null);
-                setShowReviewForm(false);
-              }
-            }}
-            className="fixed inset-0 z-9999 flex items-center justify-center p-4 sm:p-6 md:p-10 bg-brand-navy/60 backdrop-blur-md overflow-hidden animate-in fade-in duration-200"
-          >
-            <div className="bg-white rounded-[2.5rem] max-w-3xl w-full flex flex-col shadow-2xl border border-slate-100 h-full max-h-[85vh] sm:max-h-[80vh] overflow-hidden animate-in zoom-in-95 duration-200 relative">
-              <div className="p-6 sm:p-8 border-b border-slate-100 flex items-start justify-between bg-white shrink-0 relative z-10 text-right">
-                <div className="space-y-1.5">
-                  <span className="inline-flex items-center gap-1 px-3 py-1 bg-brand-gold/10 text-brand-gold rounded-full text-xs font-black">
-                    <Sparkles className="w-3 h-3 text-brand-gold" />
-                    <span>نظرة تفصيلية على البرنامج</span>
-                  </span>
-                  <h3 className="text-xl sm:text-2xl font-black text-brand-navy leading-snug pl-8">
-                    {selectedCourse.title}
-                  </h3>
-                </div>
-
-                <button
-                  onClick={() => {
-                    setSelectedCourse(null);
-                    setShowReviewForm(false);
-                  }}
-                  className="w-9 h-9 rounded-full bg-slate-100 text-brand-navy flex items-center justify-center font-black hover:bg-brand-gold hover:text-brand-navy transition-all cursor-pointer border border-slate-200/60 outline-none shrink-0 mr-4"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-
-              <div className="p-6 sm:p-8 overflow-y-auto flex-1 space-y-6 text-right [scrollbar-width:thin] [scrollbar-color:var(--color-brand-gold)_transparent] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-brand-gold/40 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-brand-gold">
-                <p className="text-slate-800 text-sm leading-relaxed font-semibold bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                  {selectedCourse.longDesc}
-                </p>
-
-                <div className="space-y-3">
-                  <h4 className="font-black text-brand-navy text-sm flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-brand-gold" />
-                    <span>المحتويات والمميزات الرسمية للدورة:</span>
-                  </h4>
-                  <ul className="grid grid-cols-1 gap-2.5 text-xs text-slate-700 font-semibold">
-                    {selectedCourse.features.map((feature, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-2 bg-slate-50 p-3 rounded-xl border border-slate-100/50"
-                      >
-                        <span className="text-brand-gold shrink-0 font-black">
-                          ✓
-                        </span>
-                        <span className="leading-relaxed text-right">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {selectedCourse.rules && (
-                  <div className="space-y-3 bg-rose-50/50 p-4 rounded-2xl border border-rose-100/60">
-                    <h4 className="font-black text-rose-700 text-sm flex items-center gap-2">
-                      <AlertTriangle className="w-4 h-4 text-rose-600" />
-                      <span>الشروط الأكاديمية وقوانين الالتصاق بالمسار:</span>
-                    </h4>
-                    <ul className="space-y-2 text-xs text-rose-900/80 font-medium">
-                      {selectedCourse.rules.map((rule, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-rose-500 shrink-0">•</span>
-                          <span className="leading-relaxed text-right">
-                            {rule}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                <div className="pt-6 border-t border-slate-100 space-y-4">
-                  <div className="flex items-center justify-between flex-wrap gap-3">
-                    <h4 className="font-black text-brand-navy text-base flex items-center gap-2">
-                      <MessageSquare className="w-4 h-4 text-brand-navy" />
-                      <span>
-                        آراء وتقييمات الطلاب والمشتركين (
-                        {courseReviews[selectedCourse.id]?.length || 0})
-                      </span>
-                    </h4>
-                    <button
-                      onClick={() => setShowReviewForm(!showReviewForm)}
-                      className="px-4 py-2 rounded-xl bg-brand-navy hover:bg-brand-gold text-white hover:text-brand-navy text-xs font-black transition-all cursor-pointer shadow-xs"
-                    >
-                      {showReviewForm
-                        ? "إلغاء التقييم"
-                        : "✍️ إضافة مراجعة وتقييم جديد"}
-                    </button>
-                  </div>
-
-                  {showReviewForm && (
-                    <form
-                      onSubmit={(e) => handleAddReview(e, selectedCourse.id)}
-                      className="bg-brand-light border border-slate-200/60 p-5 rounded-2xl space-y-4 animate-in fade-in duration-200"
-                    >
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="space-y-1.5">
-                          <label className="text-xs font-black text-brand-navy block">
-                            الاسم الكامل:
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="مثال: فيصل بن عبد الله"
-                            value={reviewName}
-                            onChange={(e) => setReviewName(e.target.value)}
-                            className="w-full bg-white border border-slate-200 rounded-xl px-3 py-2.5 text-xs font-bold focus:outline-none focus:border-brand-gold text-right"
-                          />
-                        </div>
-                        <div className="space-y-1.5">
-                          <label className="text-xs font-black text-brand-navy block">
-                            التقييم العام:
-                          </label>
-                          <Select
-                            size="sm"
-                            options={RATING_OPTIONS}
-                            value={String(reviewRating)}
-                            onChange={(v) => setReviewRating(Number(v))}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-1.5">
-                        <label className="text-xs font-black text-brand-navy block">
-                          التعليق المخصص للدورة:
-                        </label>
-                        <textarea
-                          required
-                          rows={3}
-                          placeholder="اترك تعليقك وتجربتك هنا بكل شفافية وأمانة..."
-                          value={reviewComment}
-                          onChange={(e) => setReviewComment(e.target.value)}
-                          className="w-full bg-white border border-slate-200 rounded-xl p-3 text-xs font-medium focus:outline-none focus:border-brand-gold text-right resize-none"
-                        />
-                      </div>
-
-                      <button
-                        type="submit"
-                        className="w-full py-3 rounded-xl bg-brand-navy hover:bg-brand-gold text-white hover:text-brand-navy font-black text-xs transition-all shadow-md cursor-pointer"
-                      >
-                        نشر التقييم والتعليق على الدورة فوراً
-                      </button>
-                    </form>
-                  )}
-
-                  {/* قائمة المراجعات */}
-                  <div className="space-y-3">
-                    {(courseReviews[selectedCourse.id] || []).length === 0 ? (
-                      <p className="text-xs text-brand-gray/60 text-center font-medium py-4">
-                        لا توجد تقييمات منشورة لهذا المسار التدريبي بعد. شاركنا
-                        تجربتك!
-                      </p>
-                    ) : (
-                      (courseReviews[selectedCourse.id] || []).map(
-                        (rev, idx) => (
-                          <div
-                            key={idx}
-                            className="p-4 bg-slate-50 border border-slate-100 rounded-xl space-y-1.5 text-right"
-                          >
-                            <div className="flex justify-between items-center">
-                              <div className="flex items-center gap-1.5">
-                                <User className="w-3.5 h-3.5 text-brand-navy/40" />
-                                <span className="text-xs font-black text-brand-navy">
-                                  {rev.name}
-                                </span>
-                              </div>
-                              <span className="text-[10px] text-brand-gray/50 font-bold">
-                                {rev.date}
-                              </span>
-                            </div>
-                            <div className="flex gap-0.5">
-                              {[...Array(5)].map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`w-3 h-3 ${
-                                    i < rev.rating
-                                      ? "text-brand-gold fill-brand-gold"
-                                      : "text-slate-200"
-                                  }`}
-                                />
-                              ))}
-                            </div>
-                            <p className="text-xs text-slate-700 font-medium leading-relaxed">
-                              {rev.comment}
-                            </p>
-                          </div>
-                        ),
-                      )
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-6 sm:p-8 border-t border-slate-100 bg-slate-50/90 backdrop-blur-xs flex flex-wrap items-center justify-between gap-4 shrink-0 rounded-b-[2.5rem] relative z-10 text-right">
-                <div>
-                  <span className="block text-[10px] text-brand-gray font-bold">
-                    الاستثمار الحالي للمسار
-                  </span>
-                  <span className="text-2xl font-black text-brand-navy tracking-tight">
-                    {selectedCourse.price}
-                  </span>
-                </div>
-                <button
-                  onClick={() =>
-                    window.open(
-                      "https://wa.me/966547477545",
-                      "_blank",
-                      "noopener,noreferrer",
-                    )
-                  }
-                  className="px-6 py-3.5 rounded-xl bg-brand-navy hover:bg-brand-gold text-white hover:text-brand-navy font-black text-sm transition-all shadow-lg hover:shadow-brand-navy/20 cursor-pointer"
-                >
-                  حجز المقعد وبدء الدراسة فوراً
-                </button>
-              </div>
-            </div>
-          </div>,
-          document.body,
-        )}
 
       {visibleCount < filteredCourses.length && (
         <div className="text-center mt-12">

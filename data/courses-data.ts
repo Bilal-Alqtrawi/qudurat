@@ -17,7 +17,6 @@ export interface Course {
   title: string;
   type: CourseType;
   shortDesc: string;
-  /** وصف مختصر يُستخدم في وسوم SEO (meta description / OG) دون تكرار longDesc بالكامل */
   seoDescription?: string;
   longDesc: string;
   features: string[];
@@ -26,9 +25,7 @@ export interface Course {
   oldPrice?: string;
   duration?: string;
   image: string;
-  /** المستوى المستهدف من الدورة، لعرضه كشارة في صفحة التفاصيل */
   level?: string;
-  /** محاور المنهج، اختيارية، تُستخدم في صفحة تفاصيل الدورة فقط */
   curriculum?: CurriculumModule[];
 }
 
@@ -152,6 +149,14 @@ export const INITIAL_REVIEWS: { [key: number]: Review[] } = {
     },
   ],
 };
+
+export const RATING_OPTIONS = [
+  { value: "5", label: "★★★★★ مميز جداً (5/5)" },
+  { value: "4", label: "★★★★☆ رائع ويستحق (4/5)" },
+  { value: "3", label: "★★★☆☆ متوسط المقارنة (3/5)" },
+  { value: "2", label: "★★☆☆☆ يحتاج بعض الملفات (2/5)" },
+  { value: "1", label: "★☆☆☆☆ غير راضٍ (1/5)" },
+];
 
 export function getCourseById(id: number): Course | undefined {
   return INITIAL_COURSES.find((course) => course.id === id);

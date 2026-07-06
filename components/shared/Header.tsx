@@ -46,14 +46,12 @@ export default function Header() {
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string,
   ) => {
-    setIsMobileOpen(false); // إغلاق المنيو دائماً
+    setIsMobileOpen(false);
 
-    // إذا كنا في الصفحة الرئيسية والروابط تتعلق بنفس الصفحة (هاش أو الرئيسية)
     if (pathname === "/") {
       if (href === "/") {
         e.preventDefault();
         window.scrollTo({ top: 0, behavior: "smooth" });
-        // مسح الهاش تماماً من الرابط وجعله نظيف (تم التعديل هنا إلى null)
         window.history.pushState(null, "", window.location.pathname);
       } else if (href.startsWith("/#")) {
         e.preventDefault();
@@ -61,7 +59,6 @@ export default function Header() {
         const element = document.getElementById(targetId);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
-          // تحديث الهاش بشكل نظيف بدون تراكم (تم التعديل هنا إلى null)
           window.history.pushState(null, "", href);
         }
       }
@@ -134,7 +131,7 @@ export default function Header() {
       </header>
 
       <div
-        className={`fixed inset-0 z-[55] bg-black/20 backdrop-blur-md transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 z-55 bg-black/20 backdrop-blur-md transition-opacity duration-300 md:hidden ${
           isMobileOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -144,7 +141,7 @@ export default function Header() {
       />
 
       <div
-        className={`fixed bottom-0 left-0 right-0 z-[60] bg-white rounded-t-[2.5rem] p-8 pb-12 shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
+        className={`fixed bottom-0 left-0 right-0 z-60 bg-white rounded-t-[2.5rem] p-8 pb-12 shadow-2xl transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
           isMobileOpen ? "translate-y-0" : "translate-y-full"
         }`}
       >

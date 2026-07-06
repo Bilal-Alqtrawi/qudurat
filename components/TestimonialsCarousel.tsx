@@ -140,8 +140,7 @@ export default function TestimonialsCarousel() {
           </p>
         </div>
 
-        {/* كارد العرض الرئيسي */}
-        <div className="relative min-h-[460px] sm:min-h-[500px] flex items-center justify-center px-2">
+        <div className="relative min-h-115 sm:min-h-125 flex items-center justify-center px-2">
           {SCREENSHOTS.map((img, idx) => (
             <div
               key={img.id}
@@ -151,10 +150,9 @@ export default function TestimonialsCarousel() {
                   : "opacity-0 translate-x-16 scale-95 pointer-events-none"
               }`}
             >
-              {/* إطار الصورة المطور بـ Next.js Image */}
               <div
                 onClick={() => setActiveModalImage(img.src)}
-                className="relative cursor-zoom-in group rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 h-[380px] w-full flex items-center justify-center"
+                className="relative cursor-zoom-in group rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 h-95 w-full flex items-center justify-center"
               >
                 <Image
                   src={img.src}
@@ -180,7 +178,6 @@ export default function TestimonialsCarousel() {
           ))}
         </div>
 
-        {/* أزرار التحكم والمؤشرات */}
         <div className="flex justify-center items-center gap-4 pt-2">
           <button
             onClick={prevSlide}
@@ -217,7 +214,7 @@ export default function TestimonialsCarousel() {
         mounted &&
         createPortal(
           <div
-            className="fixed inset-0 z-[999] bg-black/70 backdrop-blur-md flex items-center justify-center p-4 transition-opacity duration-300"
+            className="fixed inset-0 z-999 bg-black/70 backdrop-blur-md flex items-center justify-center p-4 transition-opacity duration-300"
             onClick={() => setActiveModalImage(null)}
           >
             <div className="relative w-full max-w-2xl h-[80vh] flex flex-col items-center justify-center animate-scaleUp">

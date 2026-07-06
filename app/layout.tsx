@@ -1,42 +1,48 @@
-import { Tajawal } from "next/font/google";
-import localFont from "next/font/local";
+import { Cairo } from "next/font/google";
+// import localFont from "next/font/local";
 
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
 
-const tajawal = Tajawal({
+const cairo = Cairo({
   subsets: ["arabic"],
-  variable: "--font-tajawal",
+  variable: "--font-cairo",
   weight: ["300", "400", "500", "700", "900"],
 });
 
-const thmanyah = localFont({
-  src: [
-    {
-      path: "../public/fonts/thmanyah-regular.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/thmanyah-medium.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/thmanyah-bold.woff2",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/thmanyah-black.woff2",
-      weight: "900",
-      style: "normal",
-    },
-  ],
-  variable: "--font-thmanyah",
-});
+/* const tajawal = Tajawal({
+  subsets: ["arabic"],
+  variable: "--font-tajawal",
+  weight: ["300", "400", "500", "700", "900"],
+}); */
+
+// const thmanyah = localFont({
+//   src: [
+//     {
+//       path: "../public/fonts/thmanyah-regular.woff2",
+//       weight: "400",
+//       style: "normal",
+//     },
+//     {
+//       path: "../public/fonts/thmanyah-medium.woff2",
+//       weight: "500",
+//       style: "normal",
+//     },
+//     {
+//       path: "../public/fonts/thmanyah-bold.woff2",
+//       weight: "700",
+//       style: "normal",
+//     },
+//     {
+//       path: "../public/fonts/thmanyah-black.woff2",
+//       weight: "900",
+//       style: "normal",
+//     },
+//   ],
+//   variable: "--font-thmanyah",
+// });
 
 export const metadata: Metadata = {
   title: {
@@ -100,7 +106,7 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${tajawal.variable} ${thmanyah.variable} h-full antialiased scroll-smooth`}
+      className={`${cairo.variable}  h-full antialiased scroll-smooth`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">

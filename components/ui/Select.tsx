@@ -180,7 +180,7 @@ export default function Select({
         aria-activedescendant={
           open ? `${listboxId}-opt-${highlighted}` : undefined
         }
-        className={`absolute z-30 mt-2 w-full max-h-72 overflow-auto rounded-2xl border border-slate-100 bg-white p-2 shadow-2xl shadow-brand-navy/10 origin-top transition-all duration-200 [scrollbar-width:thin] [scrollbar-color:var(--color-brand-gold)_transparent] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-brand-gold/40 [&::-webkit-scrollbar-thumb]:rounded-full ${
+        className={`absolute z-30 mt-2 w-full max-h-72 overflow-auto rounded-2xl border border-slate-100 bg-white p-2 shadow-2xl shadow-brand-navy/10 origin-top transition-all duration-200 scrollbar-thin [scrollbar-color:var(--color-brand-gold)_transparent] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-thumb]:bg-brand-gold/40 [&::-webkit-scrollbar-thumb]:rounded-full ${
           open
             ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
             : "opacity-0 scale-95 -translate-y-1 pointer-events-none"

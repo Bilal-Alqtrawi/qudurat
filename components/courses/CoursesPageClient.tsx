@@ -118,7 +118,7 @@ export default function CoursesPageClient({
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-3 md:w-[420px] shrink-0">
+        <div className="grid grid-cols-2 gap-3 md:w-105 shrink-0">
           <Select
             size="md"
             variant="solid"
@@ -163,7 +163,7 @@ export default function CoursesPageClient({
             return (
               <article
                 key={course.id}
-                className="bg-white rounded-[2rem] border border-slate-100 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col group"
+                className="bg-white rounded-4xl border border-slate-100 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col group"
               >
                 <div className="relative h-40 w-full bg-linear-to-b from-brand-light to-white flex items-center justify-center border-b border-slate-50 p-6">
                   <Image

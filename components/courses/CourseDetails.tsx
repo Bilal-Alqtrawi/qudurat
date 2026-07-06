@@ -99,7 +99,7 @@ export default function CourseDetails({
           الدورات
         </Link>
         <span>/</span>
-        <span className="text-brand-navy truncate max-w-[200px] sm:max-w-none">
+        <span className="text-brand-navy truncate max-w-50 sm:max-w-none">
           {course.title}
         </span>
       </nav>
@@ -108,7 +108,7 @@ export default function CourseDetails({
         {/* العمود الرئيسي */}
         <div className="space-y-8">
           {/* بطاقة الهيدر */}
-          <section className="bg-white rounded-[2rem] border border-slate-100 shadow-xs p-6 sm:p-8 space-y-5">
+          <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-5">
             <div className="flex flex-wrap items-center gap-2">
               <span
                 className={`px-3 py-1 rounded-full text-[11px] font-black tracking-wide flex items-center gap-1.5 ${
@@ -131,10 +131,10 @@ export default function CourseDetails({
                   {course.level}
                 </span>
               )}
-              <span className="flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-black bg-amber-50 text-amber-700 border border-amber-100">
+              {/* <span className="flex items-center gap-1 px-3 py-1 rounded-full text-[11px] font-black bg-amber-50 text-amber-700 border border-amber-100">
                 <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
                 {avgRating} ({reviews.length} تقييم)
-              </span>
+              </span> */}
             </div>
 
             <h1 className="text-2xl sm:text-4xl font-black text-brand-navy leading-snug">
@@ -152,9 +152,8 @@ export default function CourseDetails({
               </div>
             )}
 
-            {/* شارة توضيحية خاصة بالبث المباشر عبر زوم من الجوال (بحسب ملاحظات العميلة) */}
             {course.type === "live" && (
-              <div className="flex items-center gap-4 bg-brand-navy/[0.03] border border-brand-navy/10 rounded-2xl p-4">
+              <div className="flex items-center gap-4 bg-brand-navy/3 border border-brand-navy/10 rounded-2xl p-4">
                 <div className="relative shrink-0 w-11 h-11 rounded-full bg-brand-navy flex items-center justify-center">
                   <Phone className="w-5 h-5 text-white" />
                   <span className="absolute -bottom-1 -left-1 w-5 h-5 rounded-full bg-brand-gold flex items-center justify-center border-2 border-white">
@@ -171,7 +170,7 @@ export default function CourseDetails({
           </section>
 
           {/* الوصف التفصيلي */}
-          <section className="bg-white rounded-[2rem] border border-slate-100 shadow-xs p-6 sm:p-8 space-y-4">
+          <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-4">
             <h2 className="font-black text-brand-navy text-lg flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-brand-gold-deep" />
               نظرة تفصيلية على البرنامج
@@ -182,7 +181,7 @@ export default function CourseDetails({
           </section>
 
           {/* المميزات */}
-          <section className="bg-white rounded-[2rem] border border-slate-100 shadow-xs p-6 sm:p-8 space-y-4">
+          <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-4">
             <h2 className="font-black text-brand-navy text-lg flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-brand-gold-deep" />
               المحتويات والمميزات الرسمية للدورة
@@ -202,7 +201,7 @@ export default function CourseDetails({
 
           {/* محاور المنهج */}
           {course.curriculum && course.curriculum.length > 0 && (
-            <section className="bg-white rounded-[2rem] border border-slate-100 shadow-xs p-6 sm:p-8 space-y-5">
+            <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-5">
               <h2 className="font-black text-brand-navy text-lg flex items-center gap-2">
                 <BookOpen className="w-4 h-4 text-brand-gold-deep" />
                 محاور المنهج
@@ -235,7 +234,7 @@ export default function CourseDetails({
 
           {/* الشروط والقوانين */}
           {course.rules && (
-            <section className="bg-rose-50/50 rounded-[2rem] border border-rose-100/60 p-6 sm:p-8 space-y-3">
+            <section className="bg-rose-50/50 rounded-4xl border border-rose-100/60 p-6 sm:p-8 space-y-3">
               <h2 className="font-black text-rose-700 text-sm sm:text-base flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4 text-rose-600" />
                 الشروط الأكاديمية وقوانين الالتزام بالمسار
@@ -251,8 +250,8 @@ export default function CourseDetails({
             </section>
           )}
 
-          {/* التقييمات */}
-          <section className="bg-white rounded-[2rem] border border-slate-100 shadow-xs p-6 sm:p-8 space-y-5">
+          {/* Ratews & Reviews */}
+          {/* <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-5">
             <div className="flex items-center justify-between flex-wrap gap-3">
               <h2 className="font-black text-brand-navy text-lg flex items-center gap-2">
                 <MessageSquare className="w-4 h-4 text-brand-gold-deep" />
@@ -367,12 +366,11 @@ export default function CourseDetails({
                 ))
               )}
             </div>
-          </section>
+          </section> */}
         </div>
 
-        {/* عمود جانبي: بطاقة الحجز الثابتة */}
         <aside className="lg:sticky lg:top-28">
-          <div className="bg-white rounded-[2rem] border border-slate-100 shadow-xl p-6 sm:p-7 space-y-5">
+          <div className="bg-white rounded-4xl border border-slate-100 shadow-xl p-6 sm:p-7 space-y-5">
             <div className="relative h-32 rounded-2xl bg-linear-to-b from-brand-light to-white flex items-center justify-center border border-slate-50 overflow-hidden">
               <Image
                 src={course.image}
