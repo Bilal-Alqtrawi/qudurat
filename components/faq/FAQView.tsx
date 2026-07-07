@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, memo } from "react";
-import Header from "@/components/shared/Header";
+import Header from "@/components/shared/header/Header";
 import Footer from "@/components/shared/Footer";
 
 const FAQS = [
@@ -19,7 +19,7 @@ const FAQS = [
   },
   {
     q: "هل يوجد ضمان على نتائج الدورة؟",
-    a: "نحن نضع بين يديكِ خلاصة خبرتنا واستراتيجياتنا المعتمدة. الالتزام بتطبيق الشروحات والممارسة المستمرة هو مفتاحكِ للوصول إلى +95 بإذن الله.",
+    a: "نحن نضع بين يديكِ خلاصة خبرتنا واستراتيجياتنا المعتمدة. الالتزام بتطبيق الشروحات والممارسة المستمرة هو مفتاحكِ للوصول إلى 100 بإذن الله.",
   },
   {
     q: "هل يمكنني استرداد المبلغ في حال عدم الرغبة في إكمال الدورة؟",

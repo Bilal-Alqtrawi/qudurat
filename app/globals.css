@@ -17,25 +17,17 @@
 
   --font-cairo: var(--font-cairo), system-ui, -apple-system, sans-serif;
 
-  /* --font-thmanyah: var(--font-thmanyah); */
-
   --animate-float: float 6s ease-in-out infinite;
   --animate-blob: blob 7s infinite;
   --animate-wave: wave 10s linear infinite;
   --animate-fade-up: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* @layer base {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-thmanyah);
-    @apply font-black;
+@layer base {
+  button {
+    @apply cursor-pointer;
   }
-} */
+}
 
 @keyframes float {
   0% {
@@ -51,16 +43,16 @@
 
 @keyframes blob {
   0% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate3d(0px, 0px, 0px) scale(1);
   }
   33% {
-    transform: translate(30px, -50px) scale(1.1);
+    transform: translate3d(30px, -50px, 0px) scale(1.1);
   }
   66% {
-    transform: translate(-20px, 20px) scale(0.9);
+    transform: translate3d(-20px, 20px, 0px) scale(0.9);
   }
   100% {
-    transform: translate(0px, 0px) scale(1);
+    transform: translate3d(0px, 0px, 0px) scale(1);
   }
 }
 

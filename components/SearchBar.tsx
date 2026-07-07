@@ -1,19 +1,39 @@
 "use client";
 
-function SearchBar({
-  query,
-  setQuery,
-}: {
-  query: string;
-  setQuery: (val: string) => void;
-}) {
-  const handleSubmit = (e: React.SubmitEvent) => {
+import { useSearch } from "@/context/SearchContext";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+
+function SearchBar() {
+  const { searchQuery, setSearchQuery } = useSearch();
+  const [localQuery, setLocalQuery] = useState(searchQuery);
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // For Async
+  useEffect(() => {
+    setTimeout(() => {
+      setLocalQuery(searchQuery);
+    }, 20);
+  }, [searchQuery]);
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const trimmed = localQuery.trim();
 
-    const q = query.trim();
-    if (!q) return;
+    setSearchQuery(trimmed);
 
-    setQuery(q);
+    if (pathname !== "/courses") {
+      router.push("/courses");
+    }
+  };
+
+  const handleTagClick = (tag: string) => {
+    setLocalQuery(tag);
+    setSearchQuery(tag);
+    if (pathname !== "/courses") {
+      router.push("/courses");
+    }
   };
 
   return (
@@ -41,8 +61,8 @@ function SearchBar({
             type="text"
             placeholder="ماذا تريد أن تتعلم اليوم؟ (كمي، مقارنات، ورقي ١٤٤٧...)"
             className="w-full bg-transparent border-none text-brand-navy placeholder:text-brand-navy/30 text-sm font-bold focus:outline-none text-right"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            value={localQuery}
+            onChange={(e) => setLocalQuery(e.target.value)}
           />
         </div>
         <button
@@ -53,26 +73,23 @@ function SearchBar({
         </button>
       </form>
 
-      {/* الوسوم الأكثر طلباً المحدثة بناءً على الفيديوهات */}
+      {/* tags */}
       <div className="flex flex-wrap items-center gap-2 mt-4 px-2">
         <span className="text-xs font-bold text-brand-gray/60">
           الوسوم الشائعة:
         </span>
-        {[
-          "تجميعات ورقي ١٤٤٧",
-          "استراتيجيات المقارنة",
-          "تأسيس هندسة بالرسم",
-          "نماذج المحوسب الجديدة",
-        ].map((tag, idx) => (
-          <button
-            key={idx}
-            type="button"
-            onClick={() => setQuery(tag)}
-            className="text-[11px] font-bold text-brand-navy/70 bg-brand-light hover:bg-brand-gold/10 hover:text-brand-gold rounded-full px-3 py-1 transition-all border border-slate-50 cursor-pointer"
-          >
-            {tag}
-          </button>
-        ))}
+        {["تأسيس كمي", "تأسيس لفظي", "تدريب كمي", "بث مباشر"].map(
+          (tag, idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => handleTagClick(tag)}
+              className="text-[11px] font-bold text-brand-navy/70 bg-brand-light hover:bg-brand-gold/10 hover:text-brand-gold rounded-full px-3 py-1 transition-all border border-slate-50 cursor-pointer"
+            >
+              {tag}
+            </button>
+          ),
+        )}
       </div>
     </div>
   );

@@ -1,39 +1,9 @@
-"use client";
-
-import { useState, memo } from "react";
 import Link from "next/link";
 import { Trophy, ChartSpline } from "lucide-react";
 import SearchBar from "./SearchBar";
-
-const StaticWavyBackground = memo(function StaticWavyBackground() {
-  return (
-    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none bg-white">
-      <div className="absolute top-0 right-1/4 w-125 h-125 bg-brand-gold/5 rounded-full filter blur-[120px]" />
-      <div className="absolute bottom-10 left-1/4 w-150 h-150 bg-brand-light rounded-full filter blur-[100px]" />
-
-      <svg
-        className="absolute bottom-0 left-0 w-full h-[70%] min-h-125 text-brand-light"
-        viewBox="0 0 1440 800"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M0,320 L120,340 C240,360 480,400 720,380 C960,360 1200,280 1320,240 L1440,200 L1440,800 L1320,800 C1200,800 960,800 720,800 C480,800 240,800 120,800 L0,800 Z"
-          className="fill-brand-light/40"
-        />
-        <path
-          d="M0,420 C360,320 720,520 1080,400 C1260,340 1380,260 1440,220 L1440,800 L0,800 Z"
-          className="fill-brand-gold/2.5"
-        />
-      </svg>
-    </div>
-  );
-});
+import StaticWavyBackground from "./StaticWavyBackground";
 
 export default function Hero() {
-  const [searchQuery, setSearchQuery] = useState("");
-
   return (
     <section
       id="hero"
@@ -56,7 +26,7 @@ export default function Hero() {
           <h1 className="text-4xl sm:text-6xl lg:text-[4.25rem] font-black text-brand-navy leading-[1.15] tracking-tight">
             طريقك نحو الـ{" "}
             <span className="text-brand-gold font-black inline-block relative">
-              +٩٥
+              100
             </span>{" "}
             <br />
             يبدأ من خطوة{" "}
@@ -71,11 +41,11 @@ export default function Hero() {
             فائقة السرعة.
           </p>
 
-          <SearchBar query={searchQuery} setQuery={setSearchQuery} />
+          <SearchBar />
 
           <div className="flex flex-wrap items-center gap-4 pt-4">
             <Link
-              href="https://wa.me/966547477545"
+              href="https://wa.me/966567318977"
               target="_blank"
               className="px-8 py-4 rounded-2xl bg-brand-navy text-white font-black text-sm hover:shadow-xl hover:shadow-brand-navy/10 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
             >
@@ -91,7 +61,7 @@ export default function Hero() {
         </div>
 
         <div className="lg:col-span-5 relative hidden lg:block">
-          <div className="relative mx-auto max-w-95 p-6 rounded-[2.5rem] bg-linear-to-b from-white to-brand-light border border-slate-100 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.08)] backdrop-blur-md">
+          <div className="relative mx-auto max-w-95 p-6 rounded-[2.5rem] bg-linear-to-b from-white to-brand-light border border-slate-100 shadow-[0_40px_80px_-30px_rgba(0,0,0,0.08)] backdrop-blur-md transform-gpu">
             <div className="rounded-3xl overflow-hidden bg-brand-navy p-5 text-white relative shadow-inner space-y-4">
               <div className="flex justify-between items-center">
                 <span className="px-2.5 py-1 rounded-md bg-rose-500 text-[10px] font-black tracking-wide animate-pulse uppercase">

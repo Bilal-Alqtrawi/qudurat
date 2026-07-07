@@ -27,8 +27,8 @@ import {
 const RATING_OPTIONS = [
   { value: "5", label: "★★★★★ مميز جداً (5/5)" },
   { value: "4", label: "★★★★☆ رائع ويستحق (4/5)" },
-  { value: "3", label: "★★★☆☆ متوسط المقارنة (3/5)" },
-  { value: "2", label: "★★☆☆☆ يحتاج بعض الملفات (2/5)" },
+  { value: "3", label: "★★★☆☆ مُرضي (3/5)" },
+  { value: "2", label: "★★☆☆☆  عادي (2/5)" },
   { value: "1", label: "★☆☆☆☆ غير راضٍ (1/5)" },
 ];
 
@@ -58,7 +58,7 @@ export default function CourseDetails({
   const whatsappMessage = encodeURIComponent(
     `مرحباً أستاذة ريناد، أرغب بالاستفسار عن: ${course.title}`,
   );
-  const whatsappUrl = `https://wa.me/966547477545?text=${whatsappMessage}`;
+  const whatsappUrl = `https://wa.me/966567318977?text=${whatsappMessage}`;
 
   function handleAddReview(e: React.FormEvent) {
     e.preventDefault();
@@ -251,7 +251,7 @@ export default function CourseDetails({
           )}
 
           {/* Ratews & Reviews */}
-          {/* <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-5">
+          <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-5">
             <div className="flex items-center justify-between flex-wrap gap-3">
               <h2 className="font-black text-brand-navy text-lg flex items-center gap-2">
                 <MessageSquare className="w-4 h-4 text-brand-gold-deep" />
@@ -366,7 +366,7 @@ export default function CourseDetails({
                 ))
               )}
             </div>
-          </section> */}
+          </section>
         </div>
 
         <aside className="lg:sticky lg:top-28">
@@ -402,7 +402,7 @@ export default function CourseDetails({
             </div>
 
             <Link
-              href="https://wa.me/966547477545"
+              href="https://wa.me/966567318977"
               target="_blank"
               className="btn-gold-gradient w-full py-3.5 rounded-xl font-black text-sm flex items-center justify-center gap-2"
             >
@@ -410,15 +410,14 @@ export default function CourseDetails({
               <ChevronLeft className="w-4 h-4" />
             </Link>
 
-            <a
+            <Link
               href={whatsappUrl}
               target="_blank"
-              rel="noopener noreferrer"
               className="w-full py-3.5 rounded-xl font-black text-sm flex items-center justify-center gap-2 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors"
             >
               <MessageSquare className="w-4 h-4" />
               <span>استفسار سريع عبر واتساب</span>
-            </a>
+            </Link>
 
             <p className="text-[11px] text-brand-gray text-center leading-relaxed">
               بالتسجيل أنتِ توافقين على الشروط الأكاديمية الموضحة في الصفحة.

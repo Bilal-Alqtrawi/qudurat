@@ -32,7 +32,7 @@ const CTA = memo(function CTA() {
             {/* تحديث النص لصيغة المؤنث المباشر */}
             <h2 className="text-3xl sm:text-5xl font-black leading-tight tracking-tight">
               هل أنت مستعد لتكون نجم المنصة القادمة وتحقق{" "}
-              <span className="text-brand-gold font-black">الـ +٩٥؟</span>
+              <span className="text-brand-gold font-black">الـ 100</span>
             </h2>
 
             <p className="text-white/70 text-base sm:text-lg font-medium max-w-2xl mx-auto leading-relaxed">
@@ -43,7 +43,7 @@ const CTA = memo(function CTA() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link
-                href="https://wa.me/966547477545"
+                href="https://wa.me/966567318977"
                 target="_blank"
                 className="w-full sm:w-auto px-10 py-4.5 rounded-2xl bg-brand-gold text-brand-navy font-black text-base hover:bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 text-center cursor-pointer shadow-lg shadow-brand-gold/10"
               >

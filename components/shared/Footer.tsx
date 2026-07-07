@@ -4,7 +4,7 @@ import Logo from "./Logo";
 const socials = [
   {
     name: "واتساب",
-    href: "https://wa.me/966547477545",
+    href: "https://wa.me/966567318977",
     color:
       "hover:bg-emerald-50 hover:text-emerald-600 hover:border-emerald-200",
     icon: (
@@ -143,13 +143,13 @@ export default function Footer() {
                 { name: "الدورات والبرامج", href: "/#courses" },
                 { name: "سياسية الخصوصية", href: "privacy" },
               ].map((item, index) => (
-                <a
+                <Link
                   key={index}
                   href={item.href}
                   className="hover:text-brand-gold transition-colors duration-300 w-fit"
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </nav>
           </div>
@@ -166,16 +166,15 @@ export default function Footer() {
 
             <div className="flex flex-wrap gap-2.5">
               {socials.map((social, index) => (
-                <a
+                <Link
                   key={index}
                   href={social.href}
                   target="_blank"
-                  rel="noopener noreferrer"
                   title={social.name}
                   className={`w-11 h-11 rounded-2xl bg-brand-light text-brand-navy border border-slate-100/60 flex items-center justify-center transition-all duration-300 shadow-xs cursor-pointer ${social.color} hover:-translate-y-1`}
                 >
                   {social.icon}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

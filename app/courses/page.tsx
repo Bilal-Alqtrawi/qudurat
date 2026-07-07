@@ -30,34 +30,34 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CoursesPage() {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    itemListElement: INITIAL_COURSES.map((course, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: `/courses/${course.id}`,
-      item: {
-        "@type": "Course",
-        name: course.title,
-        description: course.seoDescription || course.shortDesc,
-        provider: {
-          "@type": "Organization",
-          name: "منصة أ. ريناد ناصر",
-        },
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: getAverageRating(INITIAL_REVIEWS[course.id]),
-          reviewCount: (INITIAL_REVIEWS[course.id] || []).length || 1,
-        },
+const jsonLd = {
+  "@context": "https://schema.org", // LATER For Put the Actually Domain
+  "@type": "ItemList",
+  itemListElement: INITIAL_COURSES.map((course, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    url: `/courses/${course.id}`,
+    item: {
+      "@type": "Course",
+      name: course.title,
+      description: course.seoDescription || course.shortDesc,
+      provider: {
+        "@type": "Organization",
+        name: "منصة أ. ريناد ناصر",
       },
-    })),
-  };
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: getAverageRating(INITIAL_REVIEWS[course.id]),
+        reviewCount: (INITIAL_REVIEWS[course.id] || []).length || 1,
+      },
+    },
+  })),
+};
 
+export default function CoursesPage() {
   return (
     <div className="min-h-screen bg-slate-50 pt-32 pb-20 px-6" dir="rtl">
-      {/* بيانات منظمة (Structured Data) لتحسين الظهور في نتائج البحث */}
+      {/* For SEO Optimization */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -75,7 +75,7 @@ export default function CoursesPage() {
           <p className="text-brand-gray text-base sm:text-lg font-medium leading-relaxed">
             اختر الطريقة الأنسب لكِ وللك للتعلم والتفوق؛ برامجنا مصممة بعناية
             لتغطية التأسيس من الصفر، التدريب المكثف، والوصول الآمن لعتبة الـ
-            +95.
+            100.
           </p>
         </div>
 

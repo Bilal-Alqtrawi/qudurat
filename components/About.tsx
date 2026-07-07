@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const credentials = [
   {
     title: "٣ دبلومات معتمدة",
@@ -97,8 +99,10 @@ export default function About() {
       id="about"
       className="py-32 px-6 bg-white relative overflow-hidden"
     >
-      <div className="absolute top-1/4 -right-20 w-96 h-96 bg-brand-gold/10 rounded-full filter blur-[100px] animate-blob pointer-events-none" />
-      <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-brand-navy/5 rounded-full filter blur-[120px] animate-blob [animation-delay:3s] pointer-events-none" />
+      <div className="absolute top-1/4 -right-20 w-72 md:w-96 h-72 md:h-96 bg-brand-gold/10 rounded-full filter blur-[60px] md:blur-[100px] md:animate-blob  pointer-events-none transform-gpu will-change-transform" />
+      <div className="absolute bottom-1/4 -left-20 w-72 md:w-96 h-72 md:h-96 bg-brand-navy/5 rounded-full filter blur-[60px] md:blur-[120px] md:animate-blob  [animation-delay:3s] pointer-events-none transform-gpu will-change-transform" />
+      {/*       <div className="absolute top-1/4 -right-20 w-96 h-96 bg-brand-gold/10 rounded-full filter blur-[100px] animate-blob pointer-events-none" />
+      <div className="absolute bottom-1/4 -left-20 w-96 h-96 bg-brand-navy/5 rounded-full filter blur-[120px] animate-blob [animation-delay:3s] pointer-events-none" /> */}
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10">
         <div className="lg:col-span-5 space-y-10 lg:sticky lg:top-32 text-right">
@@ -168,7 +172,7 @@ export default function About() {
                 </p>
               </div>
 
-              <a
+              <Link
                 href={cred.pdfUrl}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -188,7 +192,7 @@ export default function About() {
                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                   />
                 </svg>
-              </a>
+              </Link>
             </div>
           ))}
         </div>

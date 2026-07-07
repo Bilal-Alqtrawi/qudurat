@@ -1,6 +1,6 @@
 import RegisterForm from "@/components/RegisterForm";
 import Footer from "@/components/shared/Footer";
-import Header from "@/components/shared/Header";
+import Header from "@/components/shared/header/Header";
 
 export default function RegisterPage() {
   return (

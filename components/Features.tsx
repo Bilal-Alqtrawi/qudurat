@@ -73,7 +73,7 @@ export default function Features() {
           </h2>
           <p className="text-brand-gray text-sm sm:text-base font-medium max-w-xl mx-auto">
             اختار المسار الذكي الذي يتناسب مع نمط تعلمك وجدولك الدراسي لتبدء
-            رحلة حصد الـ +٩٥ في اختبارات قياس (الورقي والمحوسب).
+            رحلة حصد الـ 100 في اختبارات قياس (الورقي والمحوسب).
           </p>
         </div>
 
@@ -107,7 +107,7 @@ function TrackItem({ track }: { track: TrackProps }) {
       </p>
 
       <Link
-        href="https://wa.me/966547477545"
+        href="https://wa.me/966567318977"
         target="_blank"
         className="mt-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white group-hover:bg-brand-gold text-brand-navy group-hover:text-brand-navy font-black text-xs shadow-xs hover:shadow-md transition-all duration-400 cursor-pointer border border-slate-100/80 group-hover:border-transparent outline-0"
       >

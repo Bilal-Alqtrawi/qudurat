@@ -17,11 +17,7 @@ export default function Home() {
         </ScrollFade>
 
         <ScrollFade duration="duration-1000">
-          <Features />
-        </ScrollFade>
-
-        <ScrollFade duration="duration-1000">
-          <About />
+          <FeaturedCourses />
         </ScrollFade>
 
         <ScrollFade duration="duration-1000">
@@ -29,7 +25,11 @@ export default function Home() {
         </ScrollFade>
 
         <ScrollFade duration="duration-1000">
-          <FeaturedCourses />
+          <About />
+        </ScrollFade>
+
+        <ScrollFade duration="duration-1000">
+          <Features />
         </ScrollFade>
 
         <ScrollFade duration="duration-1000">

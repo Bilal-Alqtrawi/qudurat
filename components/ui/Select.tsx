@@ -15,9 +15,7 @@ interface SelectProps {
   onChange: (value: string) => void;
   placeholder?: string;
   label?: string;
-  /** الحجم: sm للفلاتر داخل الشريط، md للنماذج، lg لواجهات التركيز الكامل */
   size?: "sm" | "md" | "lg";
-  /** solid: خلفية داكنة بارزة (للفلاتر البارزة) | light: خلفية بيضاء بحد (للنماذج) */
   variant?: "solid" | "light";
   className?: string;
   fullWidth?: boolean;
@@ -36,11 +34,6 @@ const chevronSize: Record<NonNullable<SelectProps["size"]>, number> = {
   lg: 20,
 };
 
-/**
- * قائمة منسدلة (Select) قابلة لإعادة الاستخدام على مستوى المشروع بالكامل.
- * مبنية بمعايير وصول (a11y) كاملة عبر نمط combobox + aria-activedescendant،
- * مع دعم لوحة المفاتيح، الإغلاق عند النقر خارجها، ودعم كامل لـ RTL.
- */
 export default function Select({
   options,
   value,

@@ -20,6 +20,7 @@ import {
   type Course,
   type Review,
 } from "@/data/courses-data";
+import { useSearch } from "@/context/SearchContext";
 
 type FilterValue = "all" | "recorded" | "live";
 type SortValue = "featured" | "price-asc" | "price-desc";
@@ -70,37 +71,40 @@ export default function CoursesPageClient({
   courses,
   reviews,
 }: CoursesPageClientProps) {
-  const [search, setSearch] = useState("");
-  const [filter, setFilter] = useState<FilterValue>("all");
-  const [sort, setSort] = useState<SortValue>("featured");
+  const { searchQuery, setSearchQuery } = useSearch();
 
-  const filteredCourses = useMemo(() => {
-    const query = search.trim();
+  const [activeFilter, setActiveFilter] = useState<FilterValue>("all");
+  const [sortValue, setSortValue] = useState<SortValue>("featured");
+
+  const filteredAndSortedCourses = useMemo(() => {
     let result = courses.filter((course) => {
+      const matchesType =
+        activeFilter === "all" || course.type === activeFilter;
+
       const matchesSearch =
-        query.length === 0 ||
-        course.title.includes(query) ||
-        course.shortDesc.includes(query);
-      const matchesFilter = filter === "all" || course.type === filter;
-      return matchesSearch && matchesFilter;
+        !searchQuery ||
+        course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        course.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (course.longDesc &&
+          course.longDesc.toLowerCase().includes(searchQuery.toLowerCase()));
+
+      return matchesType && matchesSearch;
     });
 
-    if (sort === "price-asc") {
+    if (sortValue === "price-asc") {
       result = [...result].sort(
-        (a, b) => parsePrice(a.price) - parsePrice(b.price),
+        (a, b) => parseFloat(a.price) - parseFloat(b.price),
       );
-    } else if (sort === "price-desc") {
+    } else if (sortValue === "price-desc") {
       result = [...result].sort(
-        (a, b) => parsePrice(b.price) - parsePrice(a.price),
+        (a, b) => parseFloat(b.price) - parseFloat(a.price),
       );
     }
 
     return result;
-  }, [courses, search, filter, sort]);
-
+  }, [courses, activeFilter, searchQuery, sortValue]);
   return (
-    <div dir="rtl">
-      {/* شريط البحث والفلترة */}
+    <main>
       <div className="flex flex-col md:flex-row gap-4 mb-10">
         <div className="relative flex-1">
           <Search
@@ -110,11 +114,11 @@ export default function CoursesPageClient({
           />
           <input
             type="text"
-            value={search}
+            value={searchQuery}
             placeholder="ابحث عن دورتك (مثال: تجميعات، تأسيس، زوم...)"
             aria-label="ابحث في الدورات"
             className="w-full py-3.5 pr-12 pl-4 rounded-2xl border border-slate-200 bg-white font-medium text-sm text-brand-navy placeholder:text-brand-gray/50 focus:ring-4 focus:ring-brand-gold/15 focus:border-brand-gold outline-none transition-all"
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
 
@@ -122,29 +126,27 @@ export default function CoursesPageClient({
           <Select
             size="md"
             variant="solid"
-            value={filter}
-            onChange={(v) => setFilter(v as FilterValue)}
+            value={activeFilter}
+            onChange={(v) => setActiveFilter(v as FilterValue)}
             options={FILTER_OPTIONS}
           />
           <Select
             size="md"
             variant="light"
-            value={sort}
-            onChange={(v) => setSort(v as SortValue)}
+            value={sortValue}
+            onChange={(v) => setSortValue(v as SortValue)}
             options={SORT_OPTIONS}
           />
         </div>
       </div>
 
-      {/* عدد النتائج */}
       <p className="text-xs font-bold text-brand-gray mb-6">
-        {filteredCourses.length > 0
-          ? `عرض ${filteredCourses.length} من أصل ${courses.length} دورة تدريبية`
+        {filteredAndSortedCourses.length > 0
+          ? `عرض ${filteredAndSortedCourses.length} من أصل ${courses.length} دورة تدريبية`
           : "لا توجد نتائج مطابقة"}
       </p>
 
-      {/* عرض الدورات */}
-      {filteredCourses.length === 0 ? (
+      {filteredAndSortedCourses.length === 0 ? (
         <div className="text-center py-24 bg-brand-light/60 rounded-3xl border border-dashed border-slate-200">
           <Frown className="w-10 h-10 text-brand-gray/40 mx-auto mb-4" />
           <h3 className="font-black text-brand-navy text-lg mb-2">
@@ -156,7 +158,7 @@ export default function CoursesPageClient({
         </div>
       ) : (
         <div className="grid md:grid-cols-2 gap-8">
-          {filteredCourses.map((course) => {
+          {filteredAndSortedCourses.map((course) => {
             const courseReviews = reviews[course.id] || [];
             const avgRating = getAverageRating(courseReviews);
 
@@ -234,15 +236,14 @@ export default function CoursesPageClient({
                         <span>التفاصيل</span>
                         <ChevronLeft className="w-3.5 h-3.5" />
                       </Link>
-                      <a
-                        href="https://wa.me/966547477545"
+                      <Link
+                        href="https://wa.me/966567318977"
                         target="_blank"
-                        rel="noopener noreferrer"
                         aria-label="تواصل عبر واتساب"
                         className="p-3 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-100 transition-colors"
                       >
                         <MessageSquare size={18} />
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -251,6 +252,6 @@ export default function CoursesPageClient({
           })}
         </div>
       )}
-    </div>
+    </main>
   );
 }

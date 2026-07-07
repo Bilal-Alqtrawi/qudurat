@@ -124,7 +124,7 @@ export default function FeaturedCourses() {
           <p className="text-brand-gray text-base sm:text-lg font-medium leading-relaxed">
             اختر الطريقة الأنسب لكِ ولَكَ للتعلم والتفوق؛ برامجنا مصممة بعناية
             لتغطية التأسيس من الصفر، التدريب المكثف، والوصول الآمن لعتبة الـ
-            +95.
+            100.
           </p>
         </div>
 
@@ -239,7 +239,7 @@ export default function FeaturedCourses() {
                       </Link>
 
                       <Link
-                        href={`https://wa.me/966XXXXXXXXX?text=${encodeURIComponent(
+                        href={`https://wa.me/966567318977?text=${encodeURIComponent(
                           `السلام عليكم أ.ريناد،\nأريد التسجيل في: ${course.title} 🚀`,
                         )}`}
                         target="_blank"

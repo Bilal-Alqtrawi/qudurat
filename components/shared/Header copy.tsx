@@ -68,7 +68,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all  duration-300 border-b-0 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-0 ${
           isScrolled
             ? "bg-white/80 backdrop-blur-xl shadow-sm  py-3"
             : "bg-transparent py-6"
@@ -83,7 +83,7 @@ export default function Header() {
             <Logo />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-10 text-sm font-black text-brand-navy">
+          <nav className="hidden lg:flex items-center gap-10 text-sm font-black text-brand-navy">
             {navLinks.map((link, index) => {
               const isActive = pathname === link.href;
               return (
@@ -108,10 +108,10 @@ export default function Header() {
 
           <div className="flex items-center gap-4">
             <Link
-              href="https://wa.me/966547477545"
+              href="https://wa.me/966567318977"
               target="_blank"
               onClick={() => setIsMobileOpen(false)}
-              className="hidden sm:inline-flex overflow-hidden px-7 py-3 rounded-full bg-brand-navy text-white font-bold text-xs shadow-xl shadow-brand-navy/10 hover:shadow-brand-navy/20 hover:-translate-y-0.5 transition-all duration-300 relative z-60 hover:bg-brand-gold"
+              className="hidden lg:inline-flex overflow-hidden px-7 py-3 rounded-full bg-brand-navy text-white font-bold text-xs shadow-xl shadow-brand-navy/10 hover:shadow-brand-navy/20 hover:-translate-y-0.5 transition-all duration-300 relative z-60 hover:bg-brand-gold"
             >
               <span className="relative z-10 flex items-center gap-1.5">
                 <span>سجّل الآن</span>
@@ -121,7 +121,7 @@ export default function Header() {
 
             <button
               onClick={() => setIsMobileOpen(!isMobileOpen)}
-              className="md:hidden p-2 text-brand-navy hover:text-brand-gold transition-colors focus:outline-none relative cursor-pointer z-60"
+              className="lg:hidden p-2 text-brand-navy hover:text-brand-gold transition-colors focus:outline-none relative cursor-pointer z-60"
               aria-label="Toggle Menu"
             >
               {isMobileOpen ? <X size={28} /> : <Menu size={28} />}
@@ -165,7 +165,7 @@ export default function Header() {
             );
           })}
           <Link
-            href="https://wa.me/966547477545"
+            href="https://wa.me/966567318977"
             target="_blank"
             onClick={() => setIsMobileOpen(false)}
             className="mt-4 py-4 rounded-2xl bg-brand-gold text-brand-navy text-center font-black text-lg shadow-lg hover:opacity-90 transition-opacity"

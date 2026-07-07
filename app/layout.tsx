@@ -1,10 +1,10 @@
 import { Cairo } from "next/font/google";
-// import localFont from "next/font/local";
 
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/shared/Header";
+import Header from "@/components/shared/header/Header";
 import Footer from "@/components/shared/Footer";
+import { SearchProvider } from "@/context/SearchContext";
 
 const cairo = Cairo({
   subsets: ["arabic"],
@@ -12,45 +12,13 @@ const cairo = Cairo({
   weight: ["300", "400", "500", "700", "900"],
 });
 
-/* const tajawal = Tajawal({
-  subsets: ["arabic"],
-  variable: "--font-tajawal",
-  weight: ["300", "400", "500", "700", "900"],
-}); */
-
-// const thmanyah = localFont({
-//   src: [
-//     {
-//       path: "../public/fonts/thmanyah-regular.woff2",
-//       weight: "400",
-//       style: "normal",
-//     },
-//     {
-//       path: "../public/fonts/thmanyah-medium.woff2",
-//       weight: "500",
-//       style: "normal",
-//     },
-//     {
-//       path: "../public/fonts/thmanyah-bold.woff2",
-//       weight: "700",
-//       style: "normal",
-//     },
-//     {
-//       path: "../public/fonts/thmanyah-black.woff2",
-//       weight: "900",
-//       style: "normal",
-//     },
-//   ],
-//   variable: "--font-thmanyah",
-// });
-
 export const metadata: Metadata = {
   title: {
     default: "منصة الأستاذة ريناد ناصر | تأسيس القدرات والتحصيلي الذكي",
     template: "%s | منصة أ. ريناد ناصر",
   },
   description:
-    "المنصة التدريبية المعتمدة للأستاذة ريناد ناصر لتأهيل طالبات القدرات والتحصيلي. نرافقكِ خطوة بخطوة نحو الـ +٩٥ عبر استراتيجيات حل مبتكرة وبثوث مباشرة مخصصة.",
+    "المنصة التدريبية المعتمدة للأستاذة ريناد ناصر لتأهيل طالبات القدرات والتحصيلي. نرافقكِ خطوة بخطوة نحو الـ 100 عبر استراتيجيات حل مبتكرة وبثوث مباشرة مخصصة.",
   keywords: [
     "قدرات",
     "تحصيلي",
@@ -70,7 +38,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "منصة الأستاذة ريناد ناصر | تأسيس القدرات والتحصيلي الذكي",
     description:
-      "طريقك نحو الـ +٩٥ يبدأ بتأسيس ذكي مبني على أسس علمية معتمدة دولياً ومحلياً.",
+      "طريقك نحو الـ 100 يبدأ بتأسيس ذكي مبني على أسس علمية معتمدة دولياً ومحلياً.",
     // url: "https://renad-qatrat.com",
     siteName: "منصة أ. ريناد ناصر",
     images: [
@@ -111,7 +79,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <Header />
-        {children}
+        <SearchProvider>{children}</SearchProvider>
         <Footer />
       </body>
     </html>
