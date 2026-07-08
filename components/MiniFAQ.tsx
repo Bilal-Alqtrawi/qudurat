@@ -70,7 +70,7 @@ export default function MiniFAQ() {
   return (
     <section
       id="faq"
-      className="w-full py-24 bg-white px-6 relative z-10 text-right"
+      className="w-full py-24 bg-linear-to-l from-brand-gold/30 via-brand-gold-light to-brand-gold-light/30 px-6 relative z-10 text-right"
     >
       <div className="max-w-4xl mx-auto space-y-12">
         {/* العناوين */}

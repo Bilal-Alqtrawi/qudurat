@@ -1,8 +1,4 @@
-"use client";
-
-import { memo } from "react";
-
-function StaticWavyBackground() {
+export default function StaticWavyBackground() {
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none bg-white">
       <div className="absolute top-0 right-1/4 w-125 h-125 bg-brand-gold/5 rounded-full filter blur-[120px]" />
@@ -27,5 +23,3 @@ function StaticWavyBackground() {
     </div>
   );
 }
-
-export default memo(StaticWavyBackground);

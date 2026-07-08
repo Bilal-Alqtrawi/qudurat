@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "الأستاذة ريناد ناصر" }],
   creator: "منصة أ. ريناد ناصر",
-  // metadataBase: new URL("https://renad-qatrat.com"), // LATER FOR Real Domain
+  metadataBase: new URL("https://renad-qatrat.com"), // LATER FOR Real Domain
 
   // For Display logo and data when sharing in nice shape
   openGraph: {

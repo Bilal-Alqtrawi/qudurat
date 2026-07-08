@@ -111,12 +111,12 @@ export default function FAQView() {
           {/* العناوين المحدثة المتطابقة مع الهوم بايج */}
           <div className="text-center space-y-3">
             <h1 className="text-3xl sm:text-4xl font-black text-brand-navy tracking-tight">
-              لديكِ <span className="text-brand-gold">استفسار؟</span> تجدين
+              لديك <span className="text-brand-gold">استفسار؟</span> تجد
               إجابته هنا
             </h1>
             <p className="text-brand-gray text-sm sm:text-base font-medium max-w-xl mx-auto">
               كل ما تود معرفته عن آلية التدريب والتسجيل في المنصة لتنطلق بثقة
-              نحو هدفكِ.
+              نحو هدفك.
             </p>
           </div>
 

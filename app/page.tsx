@@ -1,47 +1,45 @@
 import Hero from "@/components/Hero";
-import Features from "@/components/Features";
-import About from "@/components/About";
+import Tracks from "@/components/Tracks";
 import VideoExplanation from "@/components/VideoExplanation";
 import FeaturedCourses from "@/components/FeaturedCourses";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import MiniFAQ from "@/components/MiniFAQ";
 import CTA from "@/components/shared/CTA";
 import ScrollFade from "@/components/ui/ScrollFade";
+import AboutSummary from "@/components/AboutSummary";
 
 export default function Home() {
   return (
     <div className="transition-all duration-300 relative w-full min-h-screen flex flex-col bg-white antialiased">
       <main className="w-full grow">
-        <ScrollFade>
-          <Hero />
-        </ScrollFade>
+        <Hero />
 
-        <ScrollFade duration="duration-1000">
+        <ScrollFade>
           <FeaturedCourses />
         </ScrollFade>
 
-        <ScrollFade duration="duration-1000">
+        {/* <ScrollFade>
           <VideoExplanation />
+        </ScrollFade> */}
+
+        <ScrollFade>
+          <AboutSummary />
         </ScrollFade>
 
-        <ScrollFade duration="duration-1000">
-          <About />
+        <ScrollFade>
+          <Tracks />
         </ScrollFade>
 
-        <ScrollFade duration="duration-1000">
-          <Features />
-        </ScrollFade>
-
-        <ScrollFade duration="duration-1000">
+        <ScrollFade>
           <TestimonialsCarousel />
         </ScrollFade>
 
-        <ScrollFade duration="duration-1000">
-          <MiniFAQ />
+        <ScrollFade>
+          <CTA />
         </ScrollFade>
 
-        <ScrollFade duration="duration-1000">
-          <CTA />
+        <ScrollFade>
+          <MiniFAQ />
         </ScrollFade>
       </main>
     </div>

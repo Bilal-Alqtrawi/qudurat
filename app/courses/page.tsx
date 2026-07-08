@@ -57,7 +57,6 @@ const jsonLd = {
 export default function CoursesPage() {
   return (
     <div className="min-h-screen bg-slate-50 pt-32 pb-20 px-6" dir="rtl">
-      {/* For SEO Optimization */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

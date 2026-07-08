@@ -8,7 +8,7 @@ export default function Logo() {
       width={100}
       height={100}
       priority
-      className="h-15 sm:h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+      className="aspect-auto h-15 sm:h-20 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
     />
   );
 }

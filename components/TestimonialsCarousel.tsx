@@ -126,7 +126,7 @@ export default function TestimonialsCarousel() {
 
   return (
     <section
-      className="py-20 px-6 bg-brand-light relative overflow-hidden"
+      className="py-20 px-6 relative overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >

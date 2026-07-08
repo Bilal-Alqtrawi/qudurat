@@ -1,5 +1,5 @@
 import LoaderView from "@/components/ui/LoadingView";
 
-export default function loading() {
+export default async function loading() {
   return <LoaderView />;
 }

@@ -2,7 +2,7 @@
 
 import { useSearch } from "@/context/SearchContext";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 
 function SearchBar() {
   const { searchQuery, setSearchQuery } = useSearch();
@@ -10,12 +10,12 @@ function SearchBar() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // For Async
-  useEffect(() => {
-    setTimeout(() => {
-      setLocalQuery(searchQuery);
-    }, 20);
-  }, [searchQuery]);
+  const [prevSearchQuery, setPrevSearchQuery] = useState(searchQuery);
+
+  if (searchQuery !== prevSearchQuery) {
+    setPrevSearchQuery(searchQuery);
+    setLocalQuery(searchQuery);
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,7 +78,7 @@ function SearchBar() {
         <span className="text-xs font-bold text-brand-gray/60">
           الوسوم الشائعة:
         </span>
-        {["تأسيس كمي", "تأسيس لفظي", "تدريب كمي", "بث مباشر"].map(
+        {[" تأسيس كمي ولفظي", , "تأسيس المُعاصر ثمانية", "تدريب كمي محوسب", "بث مباشر"].map(
           (tag, idx) => (
             <button
               key={idx}

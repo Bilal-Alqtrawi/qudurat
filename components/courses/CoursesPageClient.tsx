@@ -216,6 +216,44 @@ export default function CoursesPageClient({
                     )}
                   </div>
 
+                  {/* قسم المميزات - Features Grid */}
+                  {course.features && course.features.length > 0 && (
+                    <div className="mt-4 pt-4 border-t border-slate-100/80 space-y-2">
+                      <span className="text-[11px] font-black text-brand-navy/40 block mb-2">
+                        ماذا ستجد في هذا المسار؟
+                      </span>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {course.features.slice(0, 4).map((feature, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-start gap-2 group/item"
+                          >
+                            <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-emerald-600 group-hover/item:text-white transition-colors duration-300">
+                              <svg
+                                className="w-2.5 h-2.5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                strokeWidth={3}
+                              >
+                                <path
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  d="M5 13l4 4L19 7"
+                                />
+                              </svg>
+                            </div>
+
+                            <span className="text-xs font-semibold text-brand-navy/80 leading-tight group-hover/item:text-brand-navy transition-colors duration-300">
+                              {feature}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   <div className="pt-4 border-t border-slate-50 flex items-center justify-between gap-3">
                     <div className="flex flex-col">
                       {course.oldPrice && (

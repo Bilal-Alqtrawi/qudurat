@@ -1,26 +1,19 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
 import Image from "next/image";
 import {
   BookOpen,
   Video,
   Sparkles,
-  AlertTriangle,
-  CheckCircle,
   Star,
-  X,
-  User,
   MessageSquare,
-  ChevronLeft,
   Clock,
+  CircleCheckIcon,
 } from "lucide-react";
-import Select from "@/components/ui/Select";
 import {
   INITIAL_COURSES,
   INITIAL_REVIEWS,
-  RATING_OPTIONS,
   getAverageRating,
   type Course,
   type CourseType,
@@ -32,13 +25,6 @@ export default function FeaturedCourses() {
   const [activeTab, setActiveTab] = useState<"all" | CourseType>("all");
   const [visibleCount, setVisibleCount] = useState(4);
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setMounted(true);
-    }, 10);
-  }, []);
 
   useEffect(() => {
     if (selectedCourse) {
@@ -59,16 +45,10 @@ export default function FeaturedCourses() {
     [key: number]: Review[];
   }>(INITIAL_REVIEWS);
 
-  const [reviewName, setReviewName] = useState("");
-  const [reviewComment, setReviewComment] = useState("");
-  const [reviewRating, setReviewRating] = useState(5);
-  const [showReviewForm, setShowReviewForm] = useState(false);
-
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setSelectedCourse(null);
-        setShowReviewForm(false);
       }
     };
     if (selectedCourse) {
@@ -78,28 +58,6 @@ export default function FeaturedCourses() {
       window.removeEventListener("keydown", handleEscape);
     };
   }, [selectedCourse]);
-
-  const handleAddReview = (e: React.FormEvent, courseId: number) => {
-    e.preventDefault();
-    if (!reviewName.trim() || !reviewComment.trim()) return;
-
-    const newReview: Review = {
-      name: reviewName,
-      rating: reviewRating,
-      comment: reviewComment,
-      date: new Date().toISOString().split("T")[0],
-    };
-
-    setCourseReviews((prev) => ({
-      ...prev,
-      [courseId]: [newReview, ...(prev[courseId] || [])],
-    }));
-
-    setReviewName("");
-    setReviewComment("");
-    setReviewRating(5);
-    setShowReviewForm(false);
-  };
 
   const filteredCourses =
     activeTab === "all"
@@ -193,13 +151,13 @@ export default function FeaturedCourses() {
                           : "قريباً جداً"}
                   </span>
 
-                  {/* <div className="absolute bottom-3 left-4 flex items-center gap-1 bg-white px-2.5 py-1 rounded-full border border-slate-100 text-[11px] font-black text-brand-navy shadow-2xs">
+                  <div className="absolute bottom-3 left-4 flex items-center gap-1 bg-white px-2.5 py-1 rounded-full border border-slate-100 text-[11px] font-black text-brand-navy shadow-2xs">
                     <Star className="w-3 h-3 text-brand-gold fill-brand-gold" />
                     <span>{avgRating}</span>
                     <span className="text-brand-gray/60 font-bold">
                       ({reviews.length})
                     </span>
-                  </div> */}
+                  </div>
                 </div>
 
                 <div className="p-8 flex-1 flex flex-col justify-between space-y-6 text-right">
@@ -217,6 +175,32 @@ export default function FeaturedCourses() {
                       </div>
                     )}
                   </div>
+
+                  {/* قسم المميزات - Features Grid */}
+                  {course.features && course.features.length > 0 && (
+                    <div className="mt-4 pt-4 border-t border-slate-100/80 space-y-2">
+                      <span className="text-[11px] font-black text-brand-navy/40 block mb-2">
+                        ماذا ستجد في هذا المسار؟
+                      </span>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {course.features.slice(0, 4).map((feature, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-start gap-2 group/item"
+                          >
+                            <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-emerald-600 group-hover/item:text-white transition-colors duration-300">
+                              <CircleCheckIcon />
+                            </div>
+
+                            <span className="text-xs font-semibold text-brand-navy/80 leading-tight group-hover/item:text-brand-navy transition-colors duration-300">
+                              {feature}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
 
                   <div className="pt-5 border-t border-slate-50 flex items-center justify-between">
                     <div className="flex flex-col text-right">
@@ -250,13 +234,6 @@ export default function FeaturedCourses() {
                         <span>تسجيل سريع</span>
                       </Link>
                     </div>
-                    {/*           <Link
-                      href={`/courses/${course.id}`}
-                      className="px-5 py-3 rounded-xl bg-brand-light hover:bg-brand-navy text-brand-navy hover:text-white text-xs font-black transition-all duration-300 cursor-pointer border border-transparent flex items-center gap-1 hover:shadow-md"
-                    >
-                      <span>عرض التفاصيل</span>
-                      <ChevronLeft className="w-3.5 h-3.5" />
-                    </Link> */}
                   </div>
                 </div>
               </div>
