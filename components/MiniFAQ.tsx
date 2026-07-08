@@ -68,12 +68,8 @@ export default function MiniFAQ() {
   };
 
   return (
-    <section
-      id="faq"
-      className="w-full py-24 bg-linear-to-l from-brand-gold/30 via-brand-gold-light to-brand-gold-light/30 px-6 relative z-10 text-right"
-    >
+    <section id="faq" className="w-full py-24 bg-slate-50  px-6 relative z-10 text-right">
       <div className="max-w-4xl mx-auto space-y-12">
-        {/* العناوين */}
         <div className="text-center space-y-3">
           <h2 className="text-3xl sm:text-4xl font-black text-brand-navy tracking-tight">
             لديك <span className="text-brand-gold">استفسار؟</span> تجد إجابته
@@ -85,7 +81,6 @@ export default function MiniFAQ() {
           </p>
         </div>
 
-        {/* قائمة الأسئلة */}
         <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100 shadow-[0_20px_50px_-20px_rgba(22,46,68,0.05)]">
           {faqData.map((item, index) => (
             <FAQItem

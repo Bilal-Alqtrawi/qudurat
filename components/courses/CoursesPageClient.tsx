@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -8,11 +9,12 @@ import {
   ChevronLeft,
   Video,
   BookOpen,
-  Clock,
   Star,
   MessageSquare,
   SlidersHorizontal,
   Frown,
+  Maximize2,
+  X,
 } from "lucide-react";
 import Select from "@/components/ui/Select";
 import {
@@ -52,236 +54,257 @@ const FILTER_OPTIONS: {
   },
 ];
 
-const SORT_OPTIONS: { value: SortValue; label: string }[] = [
-  { value: "featured", label: "الأكثر ملاءمة" },
+const SORT_OPTIONS = [
+  { value: "featured", label: "المقترحة والمميزة" },
   { value: "price-asc", label: "السعر: من الأقل للأعلى" },
   { value: "price-desc", label: "السعر: من الأعلى للأقل" },
 ];
-
-function parsePrice(price: string): number {
-  const match = price
-    .replace(/[^\d.]/g, " ")
-    .trim()
-    .split(" ")[0];
-  const num = Number(match);
-  return Number.isFinite(num) ? num : 0;
-}
 
 export default function CoursesPageClient({
   courses,
   reviews,
 }: CoursesPageClientProps) {
   const { searchQuery, setSearchQuery } = useSearch();
-
   const [activeFilter, setActiveFilter] = useState<FilterValue>("all");
-  const [sortValue, setSortValue] = useState<SortValue>("featured");
+  const [activeSort, setActiveSort] = useState<SortValue>("featured");
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
 
-  const filteredAndSortedCourses = useMemo(() => {
-    let result = courses.filter((course) => {
-      const matchesType =
-        activeFilter === "all" || course.type === activeFilter;
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
-      const matchesSearch =
-        !searchQuery ||
-        course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        course.shortDesc.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        (course.longDesc &&
-          course.longDesc.toLowerCase().includes(searchQuery.toLowerCase()));
+  const processedCourses = useMemo(() => {
+    let result = [...courses];
 
-      return matchesType && matchesSearch;
-    });
+    if (activeFilter !== "all") {
+      result = result.filter((course) => course.type === activeFilter);
+    }
 
-    if (sortValue === "price-asc") {
-      result = [...result].sort(
-        (a, b) => parseFloat(a.price) - parseFloat(b.price),
-      );
-    } else if (sortValue === "price-desc") {
-      result = [...result].sort(
-        (a, b) => parseFloat(b.price) - parseFloat(a.price),
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase().trim();
+      result = result.filter(
+        (course) =>
+          course.title.toLowerCase().includes(query) ||
+          course.shortDesc.toLowerCase().includes(query),
       );
     }
 
+    if (activeSort === "price-asc") {
+      result.sort((a, b) => {
+        const pA = parseFloat(a.price.replace(/[^\d.]/g, "")) || 0;
+        const pB = parseFloat(b.price.replace(/[^\d.]/g, "")) || 0;
+        return pA - pB;
+      });
+    } else if (activeSort === "price-desc") {
+      result.sort((a, b) => {
+        const pA = parseFloat(a.price.replace(/[^\d.]/g, "")) || 0;
+        const pB = parseFloat(b.price.replace(/[^\d.]/g, "")) || 0;
+        return pB - pA;
+      });
+    }
+
     return result;
-  }, [courses, activeFilter, searchQuery, sortValue]);
+  }, [courses, activeFilter, searchQuery, activeSort]);
+
   return (
-    <main>
-      <div className="flex flex-col md:flex-row gap-4 mb-10">
-        <div className="relative flex-1">
-          <Search
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-gray/50 pointer-events-none"
-            size={20}
-            aria-hidden="true"
-          />
+    <main className="space-y-10">
+      {/* شريط التحكم */}
+      <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between bg-white p-4 sm:p-5 rounded-[2rem] border border-slate-200/60 shadow-3xs">
+        <div className="relative flex-1 max-w-xl group">
+          <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-gray/50 group-focus-within:text-orange-500 transition-colors" />
           <input
             type="text"
+            placeholder="ابحث عن اسم الدورة أو محتواها..."
             value={searchQuery}
-            placeholder="ابحث عن دورتك (مثال: تجميعات، تأسيس، زوم...)"
-            aria-label="ابحث في الدورات"
-            className="w-full py-3.5 pr-12 pl-4 rounded-2xl border border-slate-200 bg-white font-medium text-sm text-brand-navy placeholder:text-brand-gray/50 focus:ring-4 focus:ring-brand-gold/15 focus:border-brand-gold outline-none transition-all"
             onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-4 pr-11 py-3 text-sm bg-slate-50 border border-slate-200/70 rounded-2xl focus:outline-none focus:border-orange-500/50 focus:bg-white text-brand-navy font-bold transition-all placeholder:text-brand-gray/40"
           />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-gray/40 hover:text-brand-navy transition-colors text-xs p-1"
+            >
+              مسح
+            </button>
+          )}
         </div>
 
-        <div className="grid grid-cols-2 gap-3 md:w-105 shrink-0">
+        <div className="flex flex-wrap items-center gap-2">
+          {FILTER_OPTIONS.map((opt) => (
+            <button
+              key={opt.value}
+              onClick={() => setActiveFilter(opt.value)}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-black border transition-all duration-300 cursor-pointer ${
+                activeFilter === opt.value
+                  ? "bg-brand-navy text-white border-brand-navy shadow-sm"
+                  : "bg-slate-50 text-brand-navy border-slate-200/70 hover:bg-slate-100"
+              }`}
+            >
+              {opt.icon}
+              <span>{opt.label}</span>
+            </button>
+          ))}
+        </div>
+
+        <div className="w-full lg:w-56 shrink-0 border-t lg:border-t-0 pt-3 lg:pt-0">
           <Select
-            size="md"
-            variant="solid"
-            value={activeFilter}
-            onChange={(v) => setActiveFilter(v as FilterValue)}
-            options={FILTER_OPTIONS}
-          />
-          <Select
-            size="md"
-            variant="light"
-            value={sortValue}
-            onChange={(v) => setSortValue(v as SortValue)}
             options={SORT_OPTIONS}
+            value={activeSort}
+            onChange={(val) => setActiveSort(val as SortValue)}
           />
         </div>
       </div>
 
-      <p className="text-xs font-bold text-brand-gray mb-6">
-        {filteredAndSortedCourses.length > 0
-          ? `عرض ${filteredAndSortedCourses.length} من أصل ${courses.length} دورة تدريبية`
-          : "لا توجد نتائج مطابقة"}
-      </p>
-
-      {filteredAndSortedCourses.length === 0 ? (
-        <div className="text-center py-24 bg-brand-light/60 rounded-3xl border border-dashed border-slate-200">
-          <Frown className="w-10 h-10 text-brand-gray/40 mx-auto mb-4" />
-          <h3 className="font-black text-brand-navy text-lg mb-2">
-            لم نجد أي دورة مطابقة لبحثك
+      {processedCourses.length === 0 ? (
+        <div className="text-center py-20 bg-white rounded-[2.5rem] border border-slate-100 shadow-3xs space-y-4">
+          <div className="w-16 h-16 bg-slate-50 text-brand-gray/40 rounded-full flex items-center justify-center mx-auto border border-slate-100">
+            <Frown className="w-8 h-8" />
+          </div>
+          <h3 className="text-lg font-black text-brand-navy">
+            لم نجد أي نتائج تطابق بحثك
           </h3>
-          <p className="text-brand-gray text-sm">
-            جرّب كلمة بحث مختلفة أو أعد ضبط الفلاتر أعلاه.
-          </p>
         </div>
       ) : (
-        <div className="grid md:grid-cols-2 gap-8">
-          {filteredAndSortedCourses.map((course) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {processedCourses.map((course) => {
             const courseReviews = reviews[course.id] || [];
             const avgRating = getAverageRating(courseReviews);
 
             return (
               <article
                 key={course.id}
-                className="bg-white rounded-4xl border border-slate-100 overflow-hidden shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col group"
+                className="group relative bg-white rounded-[2.2rem] shadow-[0_15px_35px_-15px_rgba(15,23,42,0.05)] hover:shadow-[0_30px_60px_-15px_rgba(249,115,22,0.18)] transition-all duration-500 ease-out transform-gpu hover:-translate-y-2.5 will-change-transform cursor-pointer"
               >
-                <div className="relative h-40 w-full bg-linear-to-b from-brand-light to-white flex items-center justify-center border-b border-slate-50 p-6">
-                  <Image
-                    src={course.image}
-                    alt={course.title}
-                    width={84}
-                    height={84}
-                    className="object-contain group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <span
-                    className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-black tracking-wide shadow-xs flex items-center gap-1.5 ${
-                      course.type === "live"
-                        ? "bg-rose-50 text-rose-600 border border-rose-100"
-                        : "bg-blue-50 text-blue-600 border border-blue-100"
-                    }`}
-                  >
-                    {course.type === "live" ? (
-                      <Video className="w-3 h-3" />
-                    ) : (
-                      <BookOpen className="w-3 h-3" />
-                    )}
-                    {course.type === "live"
-                      ? "بث مباشر تفاعلي"
-                      : "حقيبة رقمية مسجلة"}
-                  </span>
-                  <div className="absolute bottom-3 left-4 flex items-center gap-1 bg-white px-2.5 py-1 rounded-full border border-slate-100 text-[11px] font-black text-brand-navy shadow-2xs">
-                    <Star className="w-3 h-3 text-brand-gold fill-brand-gold" />
-                    <span>{avgRating}</span>
-                    <span className="text-brand-gray/60 font-bold">
-                      ({courseReviews.length})
-                    </span>
-                  </div>
-                </div>
+                <div className="absolute inset-0 rounded-[2.2rem] border border-slate-200/70 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none z-0" />
+                <div className="absolute inset-0 p-[1.5px] bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 rounded-[2.2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
 
-                <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between gap-6 text-right">
-                  <div className="space-y-2.5">
-                    <h2 className="text-lg sm:text-xl font-black text-brand-navy leading-snug group-hover:text-brand-gold-deep transition-colors">
-                      {course.title}
-                    </h2>
-                    <p className="text-brand-gray text-sm font-medium leading-relaxed line-clamp-2">
-                      {course.shortDesc}
-                    </p>
-                    {course.duration && (
-                      <div className="text-[11px] text-emerald-700 bg-emerald-50 border border-emerald-100/60 rounded-xl px-3 py-2 font-bold inline-flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-emerald-600" />
-                        <span>{course.duration}</span>
-                      </div>
-                    )}
-                  </div>
+                <div className="relative z-10 bg-white rounded-[2.1rem] overflow-hidden flex flex-col justify-between h-full">
+                  <div className="relative h-56 w-full overflow-hidden rounded-t-[2.1rem] bg-slate-50 border-b border-slate-100 shrink-0">
+                    <Image
+                      src={course.image}
+                      alt={course.title}
+                      fill
+                      sizes="(max-w-768px) 100vw, 33vw"
+                      className="object-cover group-hover:scale-[1.02] transition-transform duration-500 ease-out transform-gpu"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 pointer-events-none" />
 
-                  {/* قسم المميزات - Features Grid */}
-                  {course.features && course.features.length > 0 && (
-                    <div className="mt-4 pt-4 border-t border-slate-100/80 space-y-2">
-                      <span className="text-[11px] font-black text-brand-navy/40 block mb-2">
-                        ماذا ستجد في هذا المسار؟
-                      </span>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setLightboxImage(course.image);
+                      }}
+                      className="absolute top-4 left-4 p-2.5 rounded-full bg-white/95 backdrop-blur-md text-brand-navy shadow-xs opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-105 z-30 cursor-zoom-in"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" />
+                    </button>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {course.features.slice(0, 4).map((feature, idx) => (
-                          <div
-                            key={idx}
-                            className="flex items-start gap-2 group/item"
-                          >
-                            <div className="w-4 h-4 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 group-hover/item:bg-emerald-600 group-hover/item:text-white transition-colors duration-300">
-                              <svg
-                                className="w-2.5 h-2.5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                strokeWidth={3}
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M5 13l4 4L19 7"
-                                />
-                              </svg>
-                            </div>
-
-                            <span className="text-xs font-semibold text-brand-navy/80 leading-tight group-hover/item:text-brand-navy transition-colors duration-300">
-                              {feature}
-                            </span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="pt-4 border-t border-slate-50 flex items-center justify-between gap-3">
-                    <div className="flex flex-col">
-                      {course.oldPrice && (
-                        <span className="text-xs text-brand-gray/50 line-through font-bold">
-                          {course.oldPrice}
-                        </span>
+                    <span
+                      className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[10px] font-black tracking-wide shadow-3xs flex items-center gap-1.5 border z-10 bg-white ${
+                        course.type === "live"
+                          ? "text-rose-600 border-rose-100"
+                          : "text-blue-600 border-blue-100"
+                      }`}
+                    >
+                      {course.type === "live" ? (
+                        <Video className="w-3 h-3" />
+                      ) : (
+                        <BookOpen className="w-3 h-3" />
                       )}
-                      <span className="text-xl font-black text-brand-navy tracking-tight">
-                        {course.price}
+                      {course.type === "live"
+                        ? "بث مباشر تفاعلي"
+                        : "حقيبة رقمية مسجلة"}
+                    </span>
+
+                    <div className="absolute bottom-4 right-4 flex items-center gap-1 bg-white px-2.5 py-1 rounded-full border border-slate-100 text-[11px] font-black text-brand-navy shadow-3xs z-10">
+                      <Star className="w-3 h-3 text-orange-500 fill-orange-500" />
+                      <span>{avgRating}</span>
+                      <span className="text-brand-gray/60 font-bold">
+                        ({courseReviews.length})
                       </span>
                     </div>
+                  </div>
 
-                    <div className="flex gap-2">
+                  <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between gap-5">
+                    <div className="space-y-2">
                       <Link
                         href={`/courses/${course.id}`}
-                        className="btn-navy-gradient px-4 py-3 rounded-xl text-center font-black text-xs flex items-center gap-1"
+                        className="block focus:outline-none after:absolute after:inset-0 after:z-10"
                       >
-                        <span>التفاصيل</span>
-                        <ChevronLeft className="w-3.5 h-3.5" />
+                        <h3 className="text-base sm:text-lg font-black text-brand-navy group-hover:text-orange-500 transition-colors duration-300 leading-snug">
+                          {course.title}
+                        </h3>
                       </Link>
-                      <Link
-                        href="https://wa.me/966567318977"
-                        target="_blank"
-                        aria-label="تواصل عبر واتساب"
-                        className="p-3 bg-emerald-50 text-emerald-600 rounded-xl hover:bg-emerald-100 transition-colors"
-                      >
-                        <MessageSquare size={18} />
-                      </Link>
+                      <p className="text-brand-gray text-xs sm:text-sm font-medium leading-relaxed line-clamp-2">
+                        {course.shortDesc}
+                      </p>
+                    </div>
+
+                    {course.features && course.features.length > 0 && (
+                      <div className="pt-4 border-t border-slate-100/80 space-y-2">
+                        <span className="text-[10px] font-black text-brand-navy/40 block mb-1">
+                          الميزات المتضمنة في المسار:
+                        </span>
+                        <div className="grid grid-cols-1 gap-2">
+                          {course.features.map((feature, idx) => (
+                            <div key={idx} className="flex items-start gap-2">
+                              <div className="w-3.5 h-3.5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 border border-emerald-100">
+                                <svg
+                                  className="w-2 h-2"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                  strokeWidth={4.5}
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M5 13l4 4L19 7"
+                                  />
+                                </svg>
+                              </div>
+                              <span className="text-xs font-bold text-brand-navy/80 leading-tight">
+                                {feature}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* الفوتر السفلي بعد تعديل الزر الأخضر إلى البرتقالي الفاخر بنص "إشترك الآن" */}
+                    <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3 relative z-20">
+                      <div className="flex flex-col">
+                        {course.oldPrice && (
+                          <span className="text-[11px] text-brand-gray/40 line-through font-bold">
+                            {course.oldPrice}
+                          </span>
+                        )}
+                        <span className="text-lg font-black text-brand-navy tracking-tight">
+                          {course.price}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 justify-end w-full">
+                        <span className="px-4 py-2.5 rounded-xl text-center bg-slate-50 group-hover:bg-brand-navy group-hover:text-white text-brand-navy text-xs font-black transition-colors duration-300 shadow-3xs pointer-events-none">
+                          التفاصيل
+                          <ChevronLeft className="w-3.5 h-3.5 inline-block mr-1" />
+                        </span>
+
+                        {/* الزر المطور والجديد تماماً */}
+                        <Link
+                          href={`https://wa.me/966567318977?text=${encodeURIComponent(`السلام عليكم أ.ريناد، أريد الاشتراك في مسار: ${course.title} 🚀`)}`}
+                          target="_blank"
+                          onClick={(e) => e.stopPropagation()}
+                          className="px-4 py-2.5 bg-orange-500 text-white rounded-xl hover:bg-brand-navy active:scale-95 transition-all duration-300 font-black text-xs flex items-center gap-1.5 shadow-3xs transform-gpu hover:-translate-y-0.5"
+                        >
+                          <MessageSquare size={14} className="animate-pulse" />
+                          {/* <span>إشترك الآن</span> */}
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -290,6 +313,35 @@ export default function CoursesPageClient({
           })}
         </div>
       )}
+
+      {mounted &&
+        lightboxImage &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-opacity duration-300"
+            onClick={() => setLightboxImage(null)}
+          >
+            <button
+              onClick={() => setLightboxImage(null)}
+              className="absolute top-6 left-6 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors duration-300 cursor-pointer z-[100000]"
+            >
+              <X className="w-6 h-6" />
+            </button>
+            <div
+              className="relative max-w-4xl w-full h-[70vh] sm:h-[80vh] rounded-3xl overflow-hidden shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={lightboxImage}
+                alt="معاينة"
+                fill
+                quality={100}
+                className="object-contain"
+              />
+            </div>
+          </div>,
+          document.body,
+        )}
     </main>
   );
 }

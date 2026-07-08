@@ -25,6 +25,7 @@ export interface Course {
   oldPrice?: string;
   duration?: string;
   image: string;
+  gallery?: string[];
   level?: string;
   curriculum?: CurriculumModule[];
 }
@@ -118,7 +119,7 @@ export const INITIAL_COURSES: Course[] = [
         ],
       },
     ],
-    image: "/logo.png",
+    image: "/file_0000000023a471fdb5ecce3685500fd3.png",
   },
 ];
 

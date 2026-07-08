@@ -35,11 +35,11 @@ export default function Home() {
         </ScrollFade>
 
         <ScrollFade>
-          <CTA />
+          <MiniFAQ />
         </ScrollFade>
 
         <ScrollFade>
-          <MiniFAQ />
+          <CTA />
         </ScrollFade>
       </main>
     </div>
