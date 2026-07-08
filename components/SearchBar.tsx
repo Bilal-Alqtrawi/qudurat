@@ -2,7 +2,7 @@
 
 import { useSearch } from "@/context/SearchContext";
 import { usePathname, useRouter } from "next/navigation";
-import {  useState } from "react";
+import { useState } from "react";
 
 function SearchBar() {
   const { searchQuery, setSearchQuery } = useSearch();
@@ -78,18 +78,21 @@ function SearchBar() {
         <span className="text-xs font-bold text-brand-gray/60">
           الوسوم الشائعة:
         </span>
-        {[" تأسيس كمي ولفظي", , "تأسيس المُعاصر ثمانية", "تدريب كمي محوسب", "بث مباشر"].map(
-          (tag, idx) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => handleTagClick(tag)}
-              className="text-[11px] font-bold text-brand-navy/70 bg-brand-light hover:bg-brand-gold/10 hover:text-brand-gold rounded-full px-3 py-1 transition-all border border-slate-50 cursor-pointer"
-            >
-              {tag}
-            </button>
-          ),
-        )}
+        {[
+          " تأسيس كمي ولفظي",
+          "تأسيس المُعاصر ثمانية",
+          "تدريب كمي محوسب",
+          "بث مباشر",
+        ].map((tag, idx) => (
+          <button
+            key={idx}
+            type="button"
+            onClick={() => handleTagClick(tag)}
+            className="text-[11px] font-bold text-brand-navy/70 bg-brand-light hover:bg-brand-gold/10 hover:text-brand-gold rounded-full px-3 py-1 transition-all border border-slate-50 cursor-pointer"
+          >
+            {tag}
+          </button>
+        ))}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import Hero from "@/components/Hero";
 import Tracks from "@/components/Tracks";
-import VideoExplanation from "@/components/VideoExplanation";
+// import VideoExplanation from "@/components/VideoExplanation";
 import FeaturedCourses from "@/components/FeaturedCourses";
 import TestimonialsCarousel from "@/components/TestimonialsCarousel";
 import MiniFAQ from "@/components/MiniFAQ";
