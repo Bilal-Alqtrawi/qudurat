@@ -39,7 +39,7 @@ export default function AuthModal({
       document.body.style.overflow = "unset";
       window.removeEventListener("keydown", handleEsc);
     };
-  }, [mode]);
+  }, [mode]); // eslint-disable-line
 
   if (!mounted || !mode) return null;
 

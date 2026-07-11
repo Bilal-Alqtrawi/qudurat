@@ -28,7 +28,6 @@ function TracksContent() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-16">
-      {/* الهيدر العلوي وزر العودة */}
       <div className="space-y-4">
         <Link
           href="/"
@@ -48,16 +47,13 @@ function TracksContent() {
       </div>
 
       <div className="space-y-12">
-        {/* المسار الأول: البث المباشر */}
         <div
           ref={boxOneRef}
           className="group relative p-8 sm:p-10 rounded-[2.5rem] bg-white shadow-[0_25px_60px_-15px_rgba(15,23,42,0.06)] hover:shadow-[0_35px_60px_-15px_rgba(22,46,68,0.25)] border border-transparent transition-all duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center transform-gpu hover:-translate-y-1"
         >
-          {/* Border Gradient ناعم قبل الـ Hover يختفي بسلاسة */}
-          <div className="absolute inset-0 p-[1.5px] bg-gradient-to-br from-slate-200 via-brand-navy/10 to-slate-200 rounded-[2.5rem] pointer-events-none z-0 group-hover:opacity-0 transition-opacity duration-500" />
+          <div className="absolute inset-0 p-[1.5px] bg-linear-to-br from-slate-200 via-brand-navy/10 to-slate-200 rounded-[2.5rem] pointer-events-none z-0 group-hover:opacity-0 transition-opacity duration-500" />
           <div className="absolute inset-[1.5px] bg-white rounded-[2.45rem] pointer-events-none z-0 group-hover:opacity-0 transition-opacity duration-500" />
 
-          {/* محتوى المسار الأول */}
           <div className="relative z-10 lg:col-span-8 space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-light text-brand-navy text-xs font-black border border-brand-navy/5">
               <Video className="w-4 h-4 text-brand-gold animate-pulse" />
@@ -85,7 +81,7 @@ function TracksContent() {
                   className="flex items-start gap-2.5 text-xs sm:text-sm font-bold text-brand-navy/90"
                 >
                   <div className="w-5 h-5 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs border border-emerald-100">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    <Check className="w-3.5 h-3.5 stroke-3" />
                   </div>
                   <span>{item}</span>
                 </li>
@@ -93,7 +89,6 @@ function TracksContent() {
             </ul>
           </div>
 
-          {/* صندوق الأكشن / السعر والتسجيل */}
           <div className="relative z-10 lg:col-span-4 flex flex-col gap-4 w-full bg-slate-50/60 p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-2xs text-center">
             <div className="space-y-1">
               <span className="text-[11px] font-black text-brand-navy bg-white px-3 py-1 rounded-full border border-slate-200/60 shadow-3xs">
@@ -114,16 +109,13 @@ function TracksContent() {
           </div>
         </div>
 
-        {/* المسار الثاني: الدورات المسجلة */}
         <div
           ref={boxTwoRef}
           className="group relative p-8 sm:p-10 rounded-[2.5rem] bg-white shadow-[0_25px_60px_-15px_rgba(15,23,42,0.06)] hover:shadow-[0_35px_60px_-15px_rgba(244,162,21,0.25)] border border-transparent transition-all duration-500 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center transform-gpu hover:-translate-y-1"
         >
-          {/* Border Gradient ذهبي ناعم قبل الـ Hover يختفي بسلاسة */}
-          <div className="absolute inset-0 p-[1.5px] bg-gradient-to-br from-slate-200 via-brand-gold/30 to-slate-200 rounded-[2.5rem] pointer-events-none z-0 group-hover:opacity-0 transition-opacity duration-500" />
+          <div className="absolute inset-0 p-[1.5px] bg-linear-to-br from-slate-200 via-brand-gold/30 to-slate-200 rounded-[2.5rem] pointer-events-none z-0 group-hover:opacity-0 transition-opacity duration-500" />
           <div className="absolute inset-[1.5px] bg-white rounded-[2.45rem] pointer-events-none z-0 group-hover:opacity-0 transition-opacity duration-500" />
 
-          {/* محتوى المسار الثاني */}
           <div className="relative z-10 lg:col-span-8 space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-50 text-brand-gold text-xs font-black border border-brand-gold/10">
               <BookOpen className="w-4 h-4 text-brand-gold" />
@@ -152,7 +144,7 @@ function TracksContent() {
                   className="flex items-start gap-2.5 text-xs sm:text-sm font-bold text-brand-navy/90"
                 >
                   <div className="w-5 h-5 rounded-md bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs border border-emerald-100">
-                    <Check className="w-3.5 h-3.5 stroke-[3]" />
+                    <Check className="w-3.5 h-3.5 stroke-3" />
                   </div>
                   <span>{item}</span>
                 </li>
@@ -160,7 +152,6 @@ function TracksContent() {
             </ul>
           </div>
 
-          {/* صندوق الأكشن / السعر والتسجيل */}
           <div className="relative z-10 lg:col-span-4 flex flex-col gap-4 w-full bg-slate-50/60 p-6 sm:p-8 rounded-3xl border border-slate-100 shadow-2xs text-center">
             <div className="space-y-1">
               <span className="text-[11px] font-black text-brand-gold bg-white px-3 py-1 rounded-full border border-slate-200/60 shadow-3xs">

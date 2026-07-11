@@ -5,13 +5,11 @@ import Link from "next/link";
 
 export default function AboutPage() {
   return (
-    // الخلفية Slate-50 لإبراز الظلال والحدود المتدرجة
     <div
       className="pt-32 pb-24 px-4 sm:px-6 bg-slate-50 min-h-screen selection:bg-brand-gold/20"
       dir="rtl"
     >
       <div className="max-w-7xl mx-auto space-y-16">
-        {/* الهيدر العلوي */}
         <div className="text-center space-y-6 max-w-3xl mx-auto px-4">
           <div className="inline-flex items-center gap-2 bg-white border border-slate-200 rounded-full px-4 py-1.5 shadow-2xs">
             <span className="text-xs font-black text-brand-navy tracking-wide">
@@ -27,45 +25,33 @@ export default function AboutPage() {
           </p>
         </div>
 
-        {/* شبكة الكروت المحسنة بالـ Border Gradient */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {credentials.map((cred, idx) => (
             <div
               key={idx}
-              // تم إضافة shadow قوي وعميق يتناسب مع فخامة الحواف المتدرجة
               className="group relative p-8 sm:p-10 rounded-[2.5rem] bg-white shadow-[0_25px_60px_-15px_rgba(15,23,42,0.08)] hover:shadow-[0_30px_60px_-15px_rgba(244,162,21,0.35)] transition-all duration-500 flex flex-col justify-between overflow-hidden transform-gpu hover:-translate-y-1.5"
             >
-              {/* [الـ Border Gradient السحري قبل الـ Hover] */}
-              {/* عبارة عن طبقة خلفية متدرجة تظهر كإطار بسمك 1px بفضل كلاس الـ inset-0 و الـ p-[1px] في الحاضن */}
-              <div className="absolute inset-0 p-[1.5px] bg-gradient-to-br from-slate-200 via-brand-gold/40 to-slate-200 rounded-[2.5rem] pointer-events-none z-0 group-hover:opacity-0 transition-opacity duration-500" />
-              {/* طبقة بيضاء داخلية لإخفاء الجراديانت ما عدا الأطراف (الحدود) */}
+              <div className="absolute inset-0 p-[1.5px] bg-linear-to-br from-slate-200 via-brand-gold/40 to-slate-200 rounded-[2.5rem] pointer-events-none z-0 group-hover:opacity-0 transition-opacity duration-500" />
               <div className="absolute inset-[1.5px] bg-white rounded-[2.45rem] pointer-events-none z-0 group-hover:opacity-0 transition-opacity duration-500" />
 
-              {/* التدرج الذهبي الكامل الذي يملأ الخلفية بالكامل "عند الـ Hover" */}
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-400 via-brand-gold to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
+              <div className="absolute inset-0 bg-linear-to-br from-amber-400 via-brand-gold to-amber-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
 
-              {/* تأثير إضاءة علوي إضافي داخل الـ Hover */}
               <div className="absolute -top-24 -left-24 w-48 h-48 bg-white/20 rounded-full filter blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
 
-              {/* محتوى الكرت الخارجي */}
               <div className="relative z-10 flex flex-col items-center text-center lg:items-start lg:text-right">
-                {/* صندوق الأيقونة بحدود ناعمة */}
                 <div className="w-16 h-16 rounded-2xl bg-slate-50 text-brand-navy flex items-center justify-center mb-6 shadow-2xs border border-slate-200 group-hover:bg-white group-hover:text-brand-navy group-hover:scale-110 transition-all duration-500">
                   {cred.icon}
                 </div>
 
-                {/* العنوان */}
                 <h3 className="text-xl sm:text-2xl font-black text-brand-navy mb-3 group-hover:text-white transition-colors duration-300">
                   {cred.title}
                 </h3>
 
-                {/* الوصف */}
                 <p className="text-sm sm:text-base text-brand-gray font-medium leading-relaxed mb-8 group-hover:text-white/90 transition-colors duration-300">
                   {cred.desc}
                 </p>
               </div>
 
-              {/* زر تصفح الملف */}
               <div className="relative z-10 w-full flex justify-center lg:justify-start">
                 <Link
                   href={cred.pdfUrl}
@@ -75,7 +61,7 @@ export default function AboutPage() {
                 >
                   <span>الاطلاع على الاعتماد الرسمي</span>
                   <svg
-                    className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-[-2px]"
+                    className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-0.5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

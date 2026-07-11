@@ -71,7 +71,9 @@ export default function CoursesPageClient({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    setTimeout(() => {
+      setMounted(true);
+    }, 10);
     return () => setMounted(false);
   }, []);
 
@@ -110,8 +112,7 @@ export default function CoursesPageClient({
 
   return (
     <main className="space-y-10">
-      {/* شريط التحكم */}
-      <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between bg-white p-4 sm:p-5 rounded-[2rem] border border-slate-200/60 shadow-3xs">
+      <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between bg-white p-4 sm:p-5 rounded-4xl border border-slate-200/60 shadow-3xs">
         <div className="relative flex-1 max-w-xl group">
           <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-gray/50 group-focus-within:text-orange-500 transition-colors" />
           <input
@@ -178,7 +179,7 @@ export default function CoursesPageClient({
                 className="group relative bg-white rounded-[2.2rem] shadow-[0_15px_35px_-15px_rgba(15,23,42,0.05)] hover:shadow-[0_30px_60px_-15px_rgba(249,115,22,0.18)] transition-all duration-500 ease-out transform-gpu hover:-translate-y-2.5 will-change-transform cursor-pointer"
               >
                 <div className="absolute inset-0 rounded-[2.2rem] border border-slate-200/70 group-hover:opacity-0 transition-opacity duration-500 pointer-events-none z-0" />
-                <div className="absolute inset-0 p-[1.5px] bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 rounded-[2.2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
+                <div className="absolute inset-0 p-[1.5px] bg-linear-to-br from-orange-500 via-amber-500 to-yellow-500 rounded-[2.2rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-0" />
 
                 <div className="relative z-10 bg-white rounded-[2.1rem] overflow-hidden flex flex-col justify-between h-full">
                   <div className="relative h-56 w-full overflow-hidden rounded-t-[2.1rem] bg-slate-50 border-b border-slate-100 shrink-0">
@@ -275,7 +276,6 @@ export default function CoursesPageClient({
                       </div>
                     )}
 
-                    {/* الفوتر السفلي بعد تعديل الزر الأخضر إلى البرتقالي الفاخر بنص "إشترك الآن" */}
                     <div className="pt-4 border-t border-slate-100 flex items-center justify-between gap-3 relative z-20">
                       <div className="flex flex-col">
                         {course.oldPrice && (
@@ -294,7 +294,6 @@ export default function CoursesPageClient({
                           <ChevronLeft className="w-3.5 h-3.5 inline-block mr-1" />
                         </span>
 
-                        {/* الزر المطور والجديد تماماً */}
                         <Link
                           href={`https://wa.me/966567318977?text=${encodeURIComponent(`السلام عليكم أ.ريناد، أريد الاشتراك في مسار: ${course.title} 🚀`)}`}
                           target="_blank"
@@ -318,12 +317,12 @@ export default function CoursesPageClient({
         lightboxImage &&
         createPortal(
           <div
-            className="fixed inset-0 z-[99999] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-opacity duration-300"
+            className="fixed inset-0 z-99999 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md transition-opacity duration-300"
             onClick={() => setLightboxImage(null)}
           >
             <button
               onClick={() => setLightboxImage(null)}
-              className="absolute top-6 left-6 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors duration-300 cursor-pointer z-[100000]"
+              className="absolute top-6 left-6 p-3 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors duration-300 cursor-pointer z-100000"
             >
               <X className="w-6 h-6" />
             </button>

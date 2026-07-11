@@ -22,17 +22,10 @@ import {
 import Select from "@/components/ui/Select";
 import {
   getAverageRating,
+  RATING_OPTIONS,
   type Course,
   type Review,
 } from "@/data/courses-data";
-
-const RATING_OPTIONS = [
-  { value: "5", label: "★★★★★ مميز جداً (5/5)" },
-  { value: "4", label: "★★★★☆ رائع ويستحق (4/5)" },
-  { value: "3", label: "★★★☆☆ مُرضي (3/5)" },
-  { value: "2", label: "★★☆☆☆  عادي (2/5)" },
-  { value: "1", label: "★☆☆☆☆ غير راضٍ (1/5)" },
-];
 
 interface CourseDetailsProps {
   course: Course;
@@ -50,11 +43,10 @@ export default function CourseDetails({
   const [reviewRating, setReviewRating] = useState(5);
   const [submitted, setSubmitted] = useState(false);
 
-  // سيناريو المعرض التفاعلي: بناء مصفوفة الصور بشكل ذكي
   const galleryImages =
     course.gallery && course.gallery.length > 0
       ? course.gallery
-      : [course.image, course.image, course.image]; // Fallback لضمان الهيكل بـ 3 صور افتراضية متطابقة للمعاينة
+      : [course.image, course.image, course.image];
 
   const [activeImage, setActiveImage] = useState<string>(galleryImages[0]);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
@@ -94,7 +86,6 @@ export default function CourseDetails({
 
   return (
     <div className="min-h-screen bg-slate-50 pt-28 sm:pt-32 pb-24" dir="rtl">
-      {/* مسار التنقل (Breadcrumb) */}
       <nav
         aria-label="مسار التنقل"
         className="max-w-5xl mx-auto px-6 mb-6 text-xs font-bold text-brand-gray flex items-center gap-2"
@@ -116,9 +107,7 @@ export default function CourseDetails({
       </nav>
 
       <div className="max-w-5xl mx-auto px-6 grid lg:grid-cols-[1.6fr_1fr] gap-8 items-start">
-        {/* العمود الرئيسي لتفاصيل الدورة */}
         <div className="space-y-8">
-          {/* بطاقة الهيدر العلوية */}
           <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-5">
             <div className="flex flex-wrap items-center gap-2">
               <span
@@ -176,7 +165,6 @@ export default function CourseDetails({
             )}
           </section>
 
-          {/* الوصف التفصيلي للمنهج */}
           <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-4">
             <h2 className="font-black text-brand-navy text-lg flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-brand-gold-deep" />
@@ -187,7 +175,6 @@ export default function CourseDetails({
             </p>
           </section>
 
-          {/* المميزات الرسمية */}
           <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-4">
             <h2 className="font-black text-brand-navy text-lg flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-brand-gold-deep" />
@@ -206,7 +193,6 @@ export default function CourseDetails({
             </ul>
           </section>
 
-          {/* محاور المنهج الجانبية */}
           {course.curriculum && course.curriculum.length > 0 && (
             <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-5">
               <h2 className="font-black text-brand-navy text-lg flex items-center gap-2">
@@ -239,7 +225,6 @@ export default function CourseDetails({
             </section>
           )}
 
-          {/* شروط وقوانين الالتزام */}
           {course.rules && (
             <section className="bg-rose-50/50 rounded-4xl border border-rose-100/60 p-6 sm:p-8 space-y-3">
               <h2 className="font-black text-rose-700 text-sm sm:text-base flex items-center gap-2">
@@ -257,7 +242,6 @@ export default function CourseDetails({
             </section>
           )}
 
-          {/* التعليقات والمراجعات */}
           <section className="bg-white rounded-4xl border border-slate-100 shadow-xs p-6 sm:p-8 space-y-5">
             <div className="flex items-center justify-between flex-wrap gap-3">
               <h2 className="font-black text-brand-navy text-lg flex items-center gap-2">
@@ -376,12 +360,9 @@ export default function CourseDetails({
           </section>
         </div>
 
-        {/* العمود الجانبي الثابت والـ Interactive Image Gallery */}
         <aside className="lg:sticky lg:top-28 w-full">
           <div className="bg-white rounded-4xl border border-slate-100 shadow-xl p-5 sm:p-6 space-y-5">
-            {/* معرض الصور المطور التفاعلي (Gallery Showcase) */}
             <div className="space-y-3">
-              {/* العارض الأساسي النشط بمميزات الـ Fill والـ 3D Scale الخفيف */}
               <div
                 onClick={() => setLightboxImage(activeImage)}
                 className="group relative h-56 rounded-2xl bg-slate-100 border border-slate-200/60 overflow-hidden cursor-zoom-in transition-transform duration-500 hover:scale-[1.01]"
@@ -395,7 +376,6 @@ export default function CourseDetails({
                   priority
                 />
 
-                {/* طبقة المؤثرات عند الحوم فوق الصورة النشطة */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
                   <div className="w-10 h-10 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-brand-navy opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100 shadow-md">
                     <Maximize2 className="w-4 h-4" />
@@ -403,7 +383,6 @@ export default function CourseDetails({
                 </div>
               </div>
 
-              {/* شبكة الصور المصغرة (Thumbnails Grid) في الجاليري */}
               <div className="grid grid-cols-3 gap-2">
                 {galleryImages.map((imgUrl, index) => (
                   <button
@@ -472,7 +451,6 @@ export default function CourseDetails({
         </aside>
       </div>
 
-      {/* الـ Lightbox المنبثق لصفحة التفاصيل عند نقر الصورة الأساسية */}
       {lightboxImage && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-navy/95 backdrop-blur-2xl transition-all duration-500"

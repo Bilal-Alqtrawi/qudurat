@@ -154,8 +154,8 @@ export const INITIAL_REVIEWS: { [key: number]: Review[] } = {
 export const RATING_OPTIONS = [
   { value: "5", label: "★★★★★ مميز جداً (5/5)" },
   { value: "4", label: "★★★★☆ رائع ويستحق (4/5)" },
-  { value: "3", label: "★★★☆☆ متوسط المقارنة (3/5)" },
-  { value: "2", label: "★★☆☆☆ يحتاج بعض الملفات (2/5)" },
+  { value: "3", label: "★★★☆☆ مُرضي (3/5)" },
+  { value: "2", label: "★★☆☆☆  عادي (2/5)" },
   { value: "1", label: "★☆☆☆☆ غير راضٍ (1/5)" },
 ];
 

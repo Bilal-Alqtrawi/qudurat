@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, memo } from "react";
-import Header from "@/components/shared/header/Header";
-import Footer from "@/components/shared/Footer";
 
 const FAQS = [
   {
@@ -104,15 +102,12 @@ export default function FAQView() {
 
   return (
     <div className="relative w-full min-h-screen flex flex-col bg-white antialiased overflow-x-hidden">
-      <Header />
-
       <main className="w-full grow pt-36 pb-24 px-6 relative z-10 bg-slate-50/40">
         <div className="max-w-4xl mx-auto space-y-12 text-right">
-          {/* العناوين المحدثة المتطابقة مع الهوم بايج */}
           <div className="text-center space-y-3">
             <h1 className="text-3xl sm:text-4xl font-black text-brand-navy tracking-tight">
-              لديك <span className="text-brand-gold">استفسار؟</span> تجد
-              إجابته هنا
+              لديك <span className="text-brand-gold">استفسار؟</span> تجد إجابته
+              هنا
             </h1>
             <p className="text-brand-gray text-sm sm:text-base font-medium max-w-xl mx-auto">
               كل ما تود معرفته عن آلية التدريب والتسجيل في المنصة لتنطلق بثقة
@@ -120,7 +115,6 @@ export default function FAQView() {
             </p>
           </div>
 
-          {/* بوكس الأسئلة الأنيق المقتبس من الـ Home Page */}
           <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-100/80 shadow-[0_20px_50px_-20px_rgba(22,46,68,0.04)]">
             {FAQS.map((faq, idx) => (
               <FAQItemRow
@@ -134,8 +128,6 @@ export default function FAQView() {
           </div>
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }
