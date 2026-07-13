@@ -46,7 +46,7 @@ export default function Header() {
                   href={link.href}
                   className={`relative py-1 tracking-wide transition-colors duration-300 group/link ${
                     isActive ? "text-brand-gold" : "hover:text-brand-gold"
-                  }`}
+                  } ${pathname === "/" && !isScrolled ? "text-white" : ""}`}
                 >
                   {link.name}
                   <span

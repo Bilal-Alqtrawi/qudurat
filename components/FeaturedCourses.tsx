@@ -22,7 +22,6 @@ import {
 
 export default function FeaturedCourses() {
   const [activeTab, setActiveTab] = useState<"all" | CourseType>("all");
-  const [visibleCount, setVisibleCount] = useState(6);
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -80,7 +79,7 @@ export default function FeaturedCourses() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-8 pt-6">
-          {filteredCourses.slice(0, visibleCount).map((course) => {
+          {filteredCourses.slice(0, 4).map((course) => {
             const reviews = INITIAL_REVIEWS[course.id] || [];
             const avgRating = getAverageRating(reviews);
 
