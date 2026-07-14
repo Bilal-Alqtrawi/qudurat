@@ -30,7 +30,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/80 backdrop-blur-xl shadow-sm py-3" : "bg-transparent py-5"}`}
+        className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/80 backdrop-blur-xl shadow-sm py-3" : pathname === "/" ? "bg-white/80 py-5" : "bg-transparent py-5"}`}
       >
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Link href="/" className="relative z-50 shrink-0">
@@ -46,7 +46,7 @@ export default function Header() {
                   href={link.href}
                   className={`relative py-1 tracking-wide transition-colors duration-300 group/link ${
                     isActive ? "text-brand-gold" : "hover:text-brand-gold"
-                  } ${pathname === "/" && !isScrolled ? "text-white" : ""}`}
+                  }`}
                 >
                   {link.name}
                   <span

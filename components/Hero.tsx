@@ -1,5 +1,3 @@
-"use client";
-
 import {
   ArrowLeft,
   GraduationCap,
@@ -13,21 +11,17 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-28 sm:pt-36 pb-16 overflow-hidden bg-gradient-to-b from-[#0B1528] via-[#0F1A2F] to-[#09101E] selection:bg-orange-500/30 select-none text-right text-white"
+      className="relative min-h-screen flex flex-col justify-center items-center px-6 pt-28 sm:pt-36 pb-16 overflow-hidden bg-linear-to-b from-[#0B1528] via-[#0F1A2F] to-[#09101E] selection:bg-orange-500/30 select-none text-right text-white"
       dir="rtl"
     >
-      {/* 🌌 تأثيرات الإضاءة الخلفية الناعمة */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-orange-500/10 rounded-full blur-[130px] transform-gpu" />
-        <div className="absolute bottom-[10%] left-[-5%] w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-[120px] transform-gpu" />
+        <div className="absolute top-[-10%] right-[-5%] size-150 bg-orange-500/10 rounded-full blur-[130px] transform-gpu" />
+        <div className="absolute bottom-[10%] left-[-5%] size-125 bg-amber-500/10 rounded-full blur-[120px] transform-gpu" />
         <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-size-[4rem_4rem]" />
       </div>
 
-      {/* 📦 الجزء العلوي: صف مقسم إلى عمودين (2 Columns) في الشاشات الكبيرة */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10 w-full flex-1">
-        {/* العمود الأيمن: النصوص وعناصر التفاعل */}
         <div className="lg:col-span-7 space-y-8 transform-gpu">
-          {/* البادج العلوي المضيء */}
           <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 backdrop-blur-md border border-white/10 text-white shadow-sm transition-all duration-300 hover:border-orange-500/30">
             <span className="flex h-2 w-2 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-500 opacity-75"></span>
@@ -38,7 +32,6 @@ export default function Hero() {
             </span>
           </div>
 
-          {/* العنوان الرئيسي للمنصة */}
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight text-white">
             طريقك نحو الـ{" "}
             <span className="text-orange-500 font-black inline-block relative px-1 after:absolute after:bottom-2 after:right-0 after:w-full after:h-3 after:bg-orange-500/20 after:-z-10">
@@ -46,18 +39,16 @@ export default function Hero() {
             </span>{" "}
             <br />
             يبدأ من خطوة{" "}
-            <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent font-black">
+            <span className="bg-linear-to-r from-amber-400 via-orange-400 to-yellow-300 bg-clip-text text-transparent font-black">
               تأسيس ذكي
             </span>
           </h1>
 
-          {/* وصف السكشن الرئيسي */}
           <p className="text-slate-300 text-base sm:text-lg font-medium max-w-2xl leading-relaxed">
             دورتنا مصممة لتأهيلك خطوة بخطوة من الصفر عبر استراتيجيات حل مبتكرة،
             تجميعات حديثة، ومتابعة دورية تضمن قفزة حقيقية في درجاتك.
           </p>
 
-          {/* أزرار الانتقال والعمليات */}
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <Link
               href="/tracks"
@@ -83,7 +74,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* العمود الأيسر: الكرت المدمج الفخم (بدلاً من الفيديو في هذا الصف) */}
         <div className="lg:col-span-5 relative w-full flex flex-col items-center transform-gpu">
           <div className="w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-[0_30px_70px_-15px_rgba(0,0,0,0.5)] border border-white/10 text-right group transition-all duration-300 hover:border-orange-500/20">
             {/* ترويسة الكرت الداكنة الحيوية */}
@@ -108,9 +98,7 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* الجزء الأبيض السفلي للإحصائيات المتطابقة مع الصورة */}
             <div className="p-4 bg-white space-y-3">
-              {/* أعلى درجة بالمنصة */}
               <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-xs font-black text-slate-900">100%</span>
                 <div className="flex items-center gap-2.5">
@@ -128,7 +116,6 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* معدل التحسن الرقمي */}
               <div className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
                 <span className="text-xs font-black text-emerald-600">
                   +٢٣٪
@@ -152,27 +139,18 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 📹 الجزء السفلي: نقل مشغل الفيديو ليكون أسفل الصفين ممتداً بعرض متزن */}
       <div className="w-full max-w-4xl mx-auto pt-16 relative z-10 transform-gpu">
         <div className="w-full relative rounded-[2.5rem] overflow-hidden bg-slate-950 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.6)] border-[6px] border-white/10 aspect-video group">
           <iframe
             className="w-full h-full object-cover rounded-4xl opacity-95 group-hover:opacity-100 transition-opacity duration-300"
-            src="https://www.youtube.com/embed/Hil3JbmFIJ0?si=EWvZlDKwS0UfBj_K"
+            src="https://www.youtube.com/embed/VQNQNRoRDig"
             title="شرح تشويقي للمنصة"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-          {/* <iframe
-            className="w-full h-full object-cover rounded-4xl opacity-95 group-hover:opacity-100 transition-opacity duration-300"
-            src="https://www.youtube.com/embed/YOUR_VIDEO_ID_HERE?rel=0"
-            title="شرح تشويقي للمنصة"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe> */}
         </div>
       </div>
 
-      {/* 🐭 أنيميشن مرر للأسفل التفاعلي اللطيف */}
       <div className="w-full flex justify-center items-center pt-14 relative z-20">
         <Link
           href="/#courses"
@@ -187,7 +165,6 @@ export default function Hero() {
         </Link>
       </div>
 
-      {/* خطوط ديكورية خفيفة في الأطراف */}
       <div className="absolute -z-10 -bottom-10 -right-10 w-52 h-52 border-4 border-white/5 rounded-full pointer-events-none" />
       <div className="absolute -z-10 -top-10 -left-10 w-40 h-40 bg-orange-500/5 rounded-full pointer-events-none filter blur-2xl transform-gpu" />
     </section>
