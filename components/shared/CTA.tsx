@@ -6,10 +6,12 @@ const CTA = memo(function CTA() {
     <section className="w-full py-16 px-6 bg-white relative z-10 text-right overflow-hidden">
       <div className="max-w-7xl mx-auto relative">
         <div className="relative w-full rounded-[2.5rem] bg-brand-navy text-white px-8 py-16 sm:p-16 overflow-hidden shadow-[0_30px_70px_-20px_rgba(22,46,68,0.3)] transform-gpu">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-brand-gold/10 rounded-full filter blur-[100px] pointer-events-none" />
-          <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-white/5 rounded-full filter blur-[80px] pointer-events-none" />
+          {/* تأثيرات خلفية خفيفة ومعززة بالـ GPU */}
+          <div className="absolute top-0 left-0 w-96 h-96 bg-brand-gold/10 rounded-full filter blur-[100px] pointer-events-none transform-gpu" />
+          <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-white/5 rounded-full filter blur-[80px] pointer-events-none transform-gpu" />
 
-          <div className="absolute inset-0 opacity-10 pointer-events-none select-none mix-blend-overlay">
+          {/* تبسيط الـ SVG وخفض جودته الديكورية لعدم إرهاق معالج الرسوميات */}
+          <div className="absolute inset-0 opacity-5 pointer-events-none select-none mix-blend-overlay">
             <svg
               className="w-full h-full"
               viewBox="0 0 1440 400"
@@ -18,7 +20,7 @@ const CTA = memo(function CTA() {
               preserveAspectRatio="none"
             >
               <path
-                d="M0,200 C360,300 720,100 1080,200 C1260,250 1380,150 1440,100 L1440,400 L0,400 Z"
+                d="M0,200 Q360,300 720,200 T1440,200 L1440,400 L0,400 Z"
                 fill="currentColor"
               />
             </svg>
@@ -29,14 +31,13 @@ const CTA = memo(function CTA() {
               ⚡ مقاعد المجموعات الحالية محدودة جداً
             </div>
 
-            {/* تحديث النص لصيغة المؤنث المباشر */}
             <h2 className="text-3xl sm:text-5xl font-black leading-tight tracking-tight">
               هل أنت مستعد لتكون نجم المنصة القادمة وتحقق{" "}
               <span className="text-brand-gold font-black">الـ 100</span>
             </h2>
 
             <p className="text-white/70 text-base sm:text-lg font-medium max-w-2xl mx-auto leading-relaxed">
-              انضم الآن إلى آلاف الطلاب اللذين اختصروا وقت التأسيس، واكتسبوا
+              انضم الآن إلى آلاف الطلاب الذين اختصروا وقت التأسيس، واكتسبوا
               تكنيكات الحل الفوري لأصعب مسائل قياس وتجمّعات الحوت والمنصف
               الحديثة. رحلتك تبدأ بنقرة زر.
             </p>
@@ -45,9 +46,10 @@ const CTA = memo(function CTA() {
               <Link
                 href="https://wa.me/966567318977"
                 target="_blank"
-                className="w-full sm:w-auto px-10 py-4.5 rounded-2xl bg-brand-gold text-brand-navy font-black text-base hover:bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 text-center cursor-pointer shadow-lg shadow-brand-gold/10"
+                rel="noopener noreferrer" // حماية أمنية تسهم إيجاباً في التقييم
+                className="w-full sm:w-auto px-10 py-4 bg-brand-gold text-brand-navy font-black text-base hover:bg-white hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5 text-center cursor-pointer shadow-lg shadow-brand-gold/10 transform-gpu"
               >
-                اشترك الآن وابدء فوراً
+                اشترك الآن وابدأ فوراً
               </Link>
             </div>
 

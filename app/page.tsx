@@ -1,12 +1,31 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero";
-import Tracks from "@/components/Tracks";
-// import VideoExplanation from "@/components/VideoExplanation";
 import FeaturedCourses from "@/components/FeaturedCourses";
-import TestimonialsCarousel from "@/components/TestimonialsCarousel";
-import MiniFAQ from "@/components/MiniFAQ";
-import CTA from "@/components/shared/CTA";
-import ScrollFade from "@/components/ui/ScrollFade";
 import AboutSummary from "@/components/AboutSummary";
+import TestimonialsCarousel from "@/components/TestimonialsCarousel";
+import ScrollFade from "@/components/ui/ScrollFade";
+
+const Tracks = dynamic(() => import("@/components/Tracks"), {
+  loading: () => (
+    <div className="min-h-75 bg-brand-navy opacity-50 animate-pulse" />
+  ),
+  ssr: true,
+});
+
+/* const TestimonialsCarousel = dynamic(
+  () => import("@/components/TestimonialsCarousel"),
+  {
+    ssr: false,
+  },
+); */
+
+const MiniFAQ = dynamic(() => import("@/components/MiniFAQ"), {
+  ssr: true,
+});
+
+const CTA = dynamic(() => import("@/components/shared/CTA"), {
+  ssr: true,
+});
 
 export default function Home() {
   return (
@@ -14,17 +33,9 @@ export default function Home() {
       <main className="w-full grow">
         <Hero />
 
-        <ScrollFade>
-          <FeaturedCourses />
-        </ScrollFade>
+        <FeaturedCourses />
 
-        {/* <ScrollFade>
-          <VideoExplanation />
-        </ScrollFade> */}
-
-        <ScrollFade>
-          <AboutSummary />
-        </ScrollFade>
+        <AboutSummary />
 
         <ScrollFade>
           <Tracks />
